@@ -1,0 +1,43 @@
+.navbar {
+    background-color: #201F1F;;
+    color: white;
+    height: 5rem;
+
+    .nav-item, 
+    .navbar-brand {
+        color: white;
+        text-decoration: none;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 1.5rem 2rem;
+
+        &:hover {
+             color: #F6AE49;
+        }
+    }
+
+    .link-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .btn-booking {
+        background-color: #F6AE49;
+        border-radius: 3px;
+        padding: 0.5rem;
+
+        &:hover {
+            background-color: #D9333E;
+            color: white;
+        }
+    }
+
+}

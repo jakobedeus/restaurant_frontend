@@ -5,17 +5,21 @@ import About from "./components/About/About";
 import Home from './components/Home/Home';
 import Booking from './components/Booking/Booking';
 import Admin from './components/Admin/Admin';
+import Navbar from './components/Navbar/Navbar';
 
 class App extends React.Component<{}, {}>  {
 
   render() {
     return (
-      <Switch>
-        <Route path='/About' component={About} />
-        <Route path='/Admin' component={Admin} />
-        <Route path='/Booking' component={Booking} />
-        <Route exact path='/' component={Home} />
-      </Switch>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route path='/About' component={About} />
+          <Route path='/Admin' component={Admin} />
+          <Route path='/Booking' component={Booking} />
+          <Route exact path='/' component={Home} />
+        </Switch>
+      </div>
     )
   }
 }

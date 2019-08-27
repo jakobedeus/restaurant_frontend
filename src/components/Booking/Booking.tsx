@@ -3,7 +3,12 @@ import './scss/Booking.scss';
 
 class Booking extends React.Component<{}, {}>  {
 
-    
+    render() {
+        return(
+            <div>Hej</div>
+        )
+    }
+
 
 }
 

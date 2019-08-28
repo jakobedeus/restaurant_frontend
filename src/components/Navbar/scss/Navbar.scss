@@ -1,7 +1,7 @@
 .navbar {
     background-color: #201F1F;;
     color: white;
-    height: 5rem;
+    height: 3.5rem;
 
     .nav-item, 
     .navbar-brand {
@@ -10,11 +10,11 @@
         font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 0.8rem;
         line-height: 22px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        margin: 1.5rem 2rem;
+        margin: 0.5rem 2rem;
 
         &:hover {
              color: #F6AE49;
@@ -32,7 +32,7 @@
     .btn-booking {
         background-color: #F6AE49;
         border-radius: 3px;
-        padding: 0.5rem;
+        padding: 0.3rem 0.5rem;
 
         &:hover {
             background-color: #D9333E;

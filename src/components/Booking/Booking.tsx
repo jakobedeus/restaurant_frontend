@@ -11,7 +11,7 @@ interface ICustomerState {
 
 class Booking extends React.Component<{}, ICustomerState>  {
 
-    postCustomerUrl = 'http://localhost:8888/restaurant_backend/api/postcustomers.php';
+    postCustomerUrl = 'http://localhost:8888/api/postcustomer.php';
 
     constructor(props: any) {
         super(props);
@@ -37,14 +37,21 @@ class Booking extends React.Component<{}, ICustomerState>  {
 
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        
-        axios.post(this.postCustomerUrl, {
+
+        let inputData = {
             customerName: this.state.customerName,
-            customerPhone: this.state.customerPhone,
-            customerEmail: this.state.customerEmail
+            customerEmail: this.state.customerEmail,
+            customerPhone: this.state.customerPhone
+        }
+
+        axios.post(this.postCustomerUrl, inputData, {
+            headers: { 'Content-Type': 'text/plain;' }
         })
-            .then((result: any) => {
-                console.log(result);
+            .then((response: any) => {
+                console.log(response)
+            })
+            .catch((error: any) => {
+                console.log(error)
             })
 
         this.setState({

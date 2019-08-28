@@ -6,6 +6,7 @@ class Navbar extends React.Component<{}, {}>  {
 
     render() {
         return(
+
 					<nav className="navbar">
             <div className="link-group">
               <Link to="/" className="navbar-brand">

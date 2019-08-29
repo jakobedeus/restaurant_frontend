@@ -1,138 +1,19 @@
 import React from "react";
 import './scss/Booking.scss';
+import CheckBooking from "./CheckBooking/CheckBooking";
+import CreateBooking from "./CreateBooking/CreateBooking";
+import CompleteBooking from "./CompleteBooking/CompleteBooking";
 
-const axios = require('axios');
 
-interface ICustomerState {
-    customerName: any,
-    customerPhone: any,
-    customerEmail: any
-}
 
-class Booking extends React.Component<{}, ICustomerState>  {
-
-    postCustomerUrl = 'http://localhost:8888/api/postcustomer.php';
-
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            customerName: '',
-            customerPhone: '',
-            customerEmail: ''
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        e.preventDefault();
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        } as Pick<ICustomerState, keyof ICustomerState>)
-    }
-
-    handleSubmit(e: { preventDefault: () => void; }) {
-        e.preventDefault();
-
-        let inputData = {
-            customerName: this.state.customerName,
-            customerEmail: this.state.customerEmail,
-            customerPhone: this.state.customerPhone
-        }
-
-        axios.post(this.postCustomerUrl, inputData, {
-            headers: { 'Content-Type': 'text/plain;' }
-        })
-            .then((response: any) => {
-                console.log(response)
-            })
-            .catch((error: any) => {
-                console.log(error)
-            })
-
-        this.setState({
-            customerName: '',
-            customerPhone: '',
-            customerEmail: ''
-        });
-    }
+class Booking extends React.Component<{}, {}>  {
 
     render() {
         return (
-            <div className="card textcenter mt-3">
-                <div className="card-body">
-                    <form id="aptForm" noValidate={true} onSubmit={this.handleSubmit}>
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right"
-                            >
-                                Name
-                  </label>
-                            <div className="col-md-10">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="customerName"
-                                    placeholder="Customer Name"
-                                    value={this.state.customerName}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-group form-row">
-                            <label
-                                className="col-md-2 col-form-label text-md-right"
-                                htmlFor="customerPhone"
-                            >
-                                Phone
-                  </label>
-                            <div className="col-md-10">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="customerPhone"
-                                    placeholder="Customer's Phone"
-                                    value={this.state.customerPhone}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-group form-row">
-                            <label
-                                className="col-md-2 col-form-label text-md-right"
-                                htmlFor="customerEmail"
-                            >
-                                Email
-                  </label>
-                            <div className="col-md-10">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="customerEmail"
-                                    placeholder="Customer'email"
-                                    value={this.state.customerEmail}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-group form-row mb-0">
-                            <div className="offset-md-2 col-md-10">
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary d-block ml-auto"
-                                >
-                                    Add customer
-                    </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div className="container">
+                <CheckBooking />
+                <CreateBooking />
+                <CompleteBooking />
             </div>
         )
     }

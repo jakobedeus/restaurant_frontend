@@ -2,12 +2,12 @@ import React from "react";
 import './scss/Admin.scss';
 import { FaPlus } from 'react-icons/fa';
 
-interface IProps {
+interface IState {
 	formDisplay: any;
 }
 
 
-class Admin extends React.Component<{}, IProps>  {
+class Admin extends React.Component<{}, IState>  {
 	constructor(props: any) {
     super(props)
     this.state = {

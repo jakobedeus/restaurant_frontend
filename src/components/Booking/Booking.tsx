@@ -10,22 +10,35 @@ export interface ICheckBookingState {
     numberOfGuests: any,
 }
 
+export interface ICreateBooking {
+    bookingName: any,
+    bookingPhone: any,
+    bookingEmail: any,
+}
+
 interface IBookingState {
-    checkReservation: ICheckBookingState[],
-    createReservation: ICreateBooking[],
+    checkReservation: ICheckBookingState,
+    createReservation: ICreateBooking,
 }
 
 const axios = require('axios');
 
-class Booking extends React.Component<{}, ICheckBookingState>  {
+class Booking extends React.Component<{}, IBookingState>  {
     
     constructor(props: any) {
         super(props)
 
         this.state = {
-            date: '',
-            time: '',
-            numberOfGuests: ''
+            checkReservation: {
+                date: '',
+                time: '',
+                numberOfGuests: '',
+            },
+            createReservation: {
+                bookingName: '',
+                bookingPhone: '',
+                bookingEmail: '',
+            },
         }
 
         this.handleCheckBookingChange = this.handleCheckBookingChange.bind(this);
@@ -36,10 +49,11 @@ class Booking extends React.Component<{}, ICheckBookingState>  {
     postCustomerUrl = 'http://localhost:8888/api/postBookingApi.php';
 
     handleCheckBooking(e: any) {
+
         let inputData = {
-            date: this.state.date,
-            numberOfGuests: this.state.numberOfGuests,
-            time: this.state.time,
+            date: this.state.checkReservation.date,
+            numberOfGuests: this.state.checkReservation.numberOfGuests,
+            time: this.state.checkReservation.time,
         }
 
         axios.post(this.checkCustomerUrl, inputData, {
@@ -57,34 +71,26 @@ class Booking extends React.Component<{}, ICheckBookingState>  {
 
     handleCheckBookingChange(e: any) {
         const target = e.target;
-        const value = target.value;
         const name = target.name;
 
         this.setState({
-            [name]: value
-        } as Pick<ICheckBookingState, keyof ICheckBookingState>)
-
-        console.log(this.state);
+            checkReservation: {
+                  ...this.state.checkReservation,
+                  [name]: e.target.value
+            }
+        })
     }
 
-    // handleCreateChange(e: React.ChangeEvent<HTMLInputElement>) {
-    //     e.preventDefault();
-    //     const target = e.target;
-    //     const value = target.value;
-    //     const name = target.name;
-
-    //     this.setState({
-    //         [name]: value
-    //     } as Pick<ICheckBookingState, keyof ICheckBookingState>)
-    // }
-
     render() {
+        console.log(this.state)
+
+
         return (
             <div className="container">
                 <CheckBooking 
-                    date={this.state.date} 
-                    time={this.state.time} 
-                    numberOfGuests={this.state.numberOfGuests} 
+                    // date={this.state.checkReservation} 
+                    // time={this.state.time} 
+                    // numberOfGuests={this.state.numberOfGuests} 
                     handleCheckBooking={this.handleCheckBooking}
                     handleCheckBookingChange={this.handleCheckBookingChange}/>
 

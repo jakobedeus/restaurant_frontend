@@ -7,9 +7,9 @@ export interface ICreateBooking {
     bookingName: string,
     bookingPhone: any,
     bookingEmail: any,
-    bookingDate: any,
-    bookingTime: any,
-    bookingGuests: any,
+    // bookingDate: any,
+    // bookingTime: any,
+    // bookingGuests: any,
 }
 
 interface ICreateBookingProps {
@@ -50,10 +50,10 @@ class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
 
-        console.log(this.props.booking[name]);
+        // console.log(this.props.booking[name]);
 
         let inputData = {
-            bookingName: this.props.booking[name],
+            // bookingName: this.props.booking[name],
 
             // bookingPhone: this.state.bookingPhone,
             // bookingEmail: this.state.bookingEmail,

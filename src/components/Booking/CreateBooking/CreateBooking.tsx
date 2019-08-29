@@ -3,7 +3,7 @@ import './scss/CreateBooking.scss';
 
 const axios = require('axios');
 
-interface ICreateBookingState {
+export interface ICreateBooking {
     bookingName: string,
     bookingPhone: any,
     bookingEmail: any,
@@ -12,20 +12,26 @@ interface ICreateBookingState {
     bookingGuests: any,
 }
 
-class CreateBooking extends React.Component<{}, ICreateBookingState>  {
+interface ICreateBookingProps {
+    booking: ICreateBooking[],
+    // handleCreateBooking(e: any): void;
+    // handleCreateBookingChange(e: any): void;
+}
+
+class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
 
     postCustomerUrl = 'http://localhost:8888/api/postBookingApi.php';
 
     constructor(props: any) {
         super(props);
-        this.state = {
-            bookingName: '',
-            bookingPhone: '',
-            bookingEmail: '',
-            bookingDate: '',
-            bookingTime: '',
-            bookingGuests: '',
-        };
+        // this.state = {
+        //     bookingName: '',
+        //     bookingPhone: '',
+        //     bookingEmail: '',
+        //     bookingDate: '',
+        //     bookingTime: '',
+        //     bookingGuests: '',
+        // };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -36,22 +42,25 @@ class CreateBooking extends React.Component<{}, ICreateBookingState>  {
         const value = target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        } as Pick<ICreateBookingState, keyof ICreateBookingState>)
+        // this.setState({
+        //     [name]: value
+        // } as Pick<ICreateBookingState, keyof ICreateBookingState>)
     }
 
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
 
-        let inputData = {
-            bookingName: this.state.bookingName,
-            bookingPhone: this.state.bookingPhone,
-            bookingEmail: this.state.bookingEmail,
+        console.log(this.props.booking[name]);
 
-            bookingDate: this.state.bookingDate,
-            bookingTime: this.state.bookingTime,
-            bookingGuests: this.state.bookingGuests,
+        let inputData = {
+            bookingName: this.props.booking[name],
+
+            // bookingPhone: this.state.bookingPhone,
+            // bookingEmail: this.state.bookingEmail,
+
+            // bookingDate: this.state.bookingDate,
+            // bookingTime: this.state.bookingTime,
+            // bookingGuests: this.state.bookingGuests,
         }
 
         axios.post(this.postCustomerUrl, inputData, {
@@ -70,10 +79,10 @@ class CreateBooking extends React.Component<{}, ICreateBookingState>  {
             <div className="card textcenter mt-3">
                 <div className="card-body">
                     <form id="aptForm" noValidate={true} onSubmit={this.handleSubmit}>
-
+{/* 
                         <input type="hidden" name="" id="" value={this.state.bookingDate} />
                         <input type="hidden" name="" id="" value={this.state.bookingGuests} />
-                        <input type="hidden" name="" id="" value={this.state.bookingTime} />
+                        <input type="hidden" name="" id="" value={this.state.bookingTime} /> */}
 
                         <div className="form-group form-row">
                             <label className="col-md-2 col-form-label text-md-right">
@@ -85,7 +94,7 @@ class CreateBooking extends React.Component<{}, ICreateBookingState>  {
                                     className="form-control"
                                     name="customerName"
                                     placeholder="Customer Name"
-                                    value={this.state.bookingName}
+                                    // value={this.state.bookingName}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -101,7 +110,7 @@ class CreateBooking extends React.Component<{}, ICreateBookingState>  {
                                     className="form-control"
                                     name="customerPhone"
                                     placeholder="Customer's Phone"
-                                    value={this.state.bookingPhone}
+                                    // value={this.state.bookingPhone}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -117,7 +126,7 @@ class CreateBooking extends React.Component<{}, ICreateBookingState>  {
                                     className="form-control"
                                     name="customerEmail"
                                     placeholder="Customer'email"
-                                    value={this.state.bookingEmail}
+                                    // value={this.state.bookingEmail}
                                     onChange={this.handleChange}
                                 />
                             </div>

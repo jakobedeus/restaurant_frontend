@@ -1,59 +1,37 @@
 import React from "react";
 import './scss/CheckBooking.scss';
 
-const axios = require('axios');
-
 interface ICheckBookingState {
     date: any,
     time: any,
-    numberOfGuests: any
+    numberOfGuests: any,
 }
 
-class CheckBooking extends React.Component<{}, ICheckBookingState>  {
-    postCustomerUrl = 'http://localhost:8888/api/checkBookingApi.php';
+interface ICheckBookingProps {
+    date: any,
+    time: any,
+    numberOfGuests: any,
+    handleCheckBooking(e: any): void;
+    handleCheckBookingChange(e: any): void;
+}
+
+class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingState>  {
+
 
     constructor(props: any) {
         super(props);
-        this.state = {
-            date: '',
-            time: '',
-            numberOfGuests: ''
-        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        } as Pick<ICheckBookingState, keyof ICheckBookingState>)
+        this.props.handleCheckBookingChange(e);
     }
 
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        let inputData = {
-            date: this.state.date,
-            // numberOfGuests: this.state.numberOfGuests,
-            time: this.state.time,
-        }
-
-        axios.post(this.postCustomerUrl, inputData, {
-            headers: { 'Content-Type': 'text/plain;' }
-        }).then((response: any) => {
-            if (response.data.length > 1) {
-                console.log("fullt")
-            } else {
-                console.log("du får boka")
-            }
-        }).catch((error: any) => {
-            console.log(error)
-        })
-
+        this.props.handleCheckBooking(e);
     }
 
     render() {
@@ -71,7 +49,7 @@ class CheckBooking extends React.Component<{}, ICheckBookingState>  {
                                     className="form-control"
                                     name="date"
                                     placeholder="Date"
-                                    value={this.state.date}
+                                    value={this.props.date}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -101,7 +79,7 @@ class CheckBooking extends React.Component<{}, ICheckBookingState>  {
                                     className="form-control"
                                     name="numberOfGuests"
                                     placeholder="Number of guests"
-                                    value={this.state.numberOfGuests}
+                                    value={this.props.numberOfGuests}
                                     onChange={this.handleChange}
                                 />
                             </div>

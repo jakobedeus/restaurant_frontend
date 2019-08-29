@@ -17,15 +17,15 @@ interface IBookingState {
 
 const axios = require('axios');
 
-
 class Booking extends React.Component<{}, ICheckBookingState>  {
+    
     constructor(props: any) {
         super(props)
 
         this.state = {
             date: '',
             time: '',
-            numberOfGuests: '',
+            numberOfGuests: ''
         }
 
         this.handleCheckBookingChange = this.handleCheckBookingChange.bind(this);
@@ -38,7 +38,7 @@ class Booking extends React.Component<{}, ICheckBookingState>  {
     handleCheckBooking(e: any) {
         let inputData = {
             date: this.state.date,
-            // numberOfGuests: this.state.numberOfGuests,
+            numberOfGuests: this.state.numberOfGuests,
             time: this.state.time,
         }
 
@@ -49,7 +49,6 @@ class Booking extends React.Component<{}, ICheckBookingState>  {
                 console.log("fullt")
             } else {
                 console.log("du får boka")
-                // this.setState({date: })
             }
         }).catch((error: any) => {
             console.log(error)
@@ -64,18 +63,20 @@ class Booking extends React.Component<{}, ICheckBookingState>  {
         this.setState({
             [name]: value
         } as Pick<ICheckBookingState, keyof ICheckBookingState>)
+
+        console.log(this.state);
     }
 
-    handleCreateChange(e: React.ChangeEvent<HTMLInputElement>) {
-        e.preventDefault();
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
+    // handleCreateChange(e: React.ChangeEvent<HTMLInputElement>) {
+    //     e.preventDefault();
+    //     const target = e.target;
+    //     const value = target.value;
+    //     const name = target.name;
 
-        this.setState({
-            [name]: value
-        } as Pick<ICheckBookingState, keyof ICheckBookingState>)
-    }
+    //     this.setState({
+    //         [name]: value
+    //     } as Pick<ICheckBookingState, keyof ICheckBookingState>)
+    // }
 
     render() {
         return (

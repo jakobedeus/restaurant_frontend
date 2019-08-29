@@ -48,8 +48,8 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                                     type="text"
                                     className="form-control"
                                     name="date"
-                                    placeholder="Date"
                                     value={this.props.date}
+                                    placeholder="Date"
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -78,8 +78,8 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                                     type="text"
                                     className="form-control"
                                     name="numberOfGuests"
-                                    placeholder="Number of guests"
                                     value={this.props.numberOfGuests}
+                                    placeholder="Number of guests"
                                     onChange={this.handleChange}
                                 />
                             </div>

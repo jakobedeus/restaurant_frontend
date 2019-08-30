@@ -8,15 +8,11 @@ interface ICheckBookingState {
 }
 
 interface ICheckBookingProps {
-    // date: any,
-    // time: any,
-    // numberOfGuests: any,
     handleCheckBooking(e: any): void;
     handleCheckBookingChange(e: any): void;
 }
 
 class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingState>  {
-
 
     constructor(props: any) {
         super(props);
@@ -48,7 +44,6 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                                     type="text"
                                     className="form-control"
                                     name="date"
-                                    // value={this.props.date}
                                     placeholder="Date"
                                     onChange={this.handleChange}
                                 />
@@ -78,7 +73,6 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                                     type="text"
                                     className="form-control"
                                     name="numberOfGuests"
-                                    // value={this.props.numberOfGuests}
                                     placeholder="Number of guests"
                                     onChange={this.handleChange}
                                 />

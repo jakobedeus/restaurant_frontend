@@ -3,75 +3,38 @@ import './scss/CreateBooking.scss';
 
 const axios = require('axios');
 
-export interface ICreateBooking {
+export interface ICreateBookingState {
     bookingName: string,
     bookingPhone: any,
     bookingEmail: any,
-    // bookingDate: any,
-    // bookingTime: any,
-    // bookingGuests: any,
 }
 
-interface ICreateBookingProps {
-    booking: ICreateBooking[],
-    // handleCreateBooking(e: any): void;
-    // handleCreateBookingChange(e: any): void;
+export interface ICreateBookingProps {
+    bookingDate: any,
+    bookingTime: any,
+    bookingGuests: any,
+    handleCreateBooking(e: any): void;
+    handleCreateBookingChange(e: any): void;
 }
 
-class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
+class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingState>  {
 
     postCustomerUrl = 'http://localhost:8888/api/postBookingApi.php';
 
     constructor(props: any) {
         super(props);
-        // this.state = {
-        //     bookingName: '',
-        //     bookingPhone: '',
-        //     bookingEmail: '',
-        //     bookingDate: '',
-        //     bookingTime: '',
-        //     bookingGuests: '',
-        // };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        // this.setState({
-        //     [name]: value
-        // } as Pick<ICreateBookingState, keyof ICreateBookingState>)
+        this.props.handleCreateBookingChange(e);
     }
 
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-
-        // console.log(this.props.booking[name]);
-
-        let inputData = {
-            // bookingName: this.props.booking[name],
-
-            // bookingPhone: this.state.bookingPhone,
-            // bookingEmail: this.state.bookingEmail,
-
-            // bookingDate: this.state.bookingDate,
-            // bookingTime: this.state.bookingTime,
-            // bookingGuests: this.state.bookingGuests,
-        }
-
-        axios.post(this.postCustomerUrl, inputData, {
-            headers: { 'Content-Type': 'text/plain;' }
-        })
-            .then((response: any) => {
-                console.log(response)
-            })
-            .catch((error: any) => {
-                console.log(error)
-            })
+        this.props.handleCreateBooking(e);
     }
 
     render() {
@@ -79,10 +42,10 @@ class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
             <div className="card textcenter mt-3">
                 <div className="card-body">
                     <form id="aptForm" noValidate={true} onSubmit={this.handleSubmit}>
-{/* 
-                        <input type="hidden" name="" id="" value={this.state.bookingDate} />
-                        <input type="hidden" name="" id="" value={this.state.bookingGuests} />
-                        <input type="hidden" name="" id="" value={this.state.bookingTime} /> */}
+
+                        <input type="hidden" name="" id="" value={this.props.bookingDate} />
+                        <input type="hidden" name="" id="" value={this.props.bookingGuests} />
+                        <input type="hidden" name="" id="" value={this.props.bookingTime} /> 
 
                         <div className="form-group form-row">
                             <label className="col-md-2 col-form-label text-md-right">
@@ -92,9 +55,8 @@ class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="customerName"
+                                    name="bookingName"
                                     placeholder="Customer Name"
-                                    // value={this.state.bookingName}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -108,9 +70,8 @@ class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="customerPhone"
+                                    name="bookingPhone"
                                     placeholder="Customer's Phone"
-                                    // value={this.state.bookingPhone}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -124,9 +85,8 @@ class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="customerEmail"
+                                    name="bookingEmail"
                                     placeholder="Customer'email"
-                                    // value={this.state.bookingEmail}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -135,7 +95,7 @@ class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
                         <div className="form-group form-row mb-0">
                             <div className="offset-md-2 col-md-10">
                                 <button type="submit" className="btn btn-primary d-block ml-auto">
-                                    Add customer
+                                    Add reservation
                             </button>
                             </div>
                         </div>
@@ -144,8 +104,6 @@ class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
             </div>
         )
     }
-
-
 }
 
 export default CreateBooking;

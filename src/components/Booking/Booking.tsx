@@ -1,13 +1,14 @@
 import React from "react";
 import './scss/Booking.scss';
 import CheckBooking from "./CheckBooking/CheckBooking";
-import CreateBooking, { ICreateBooking } from "./CreateBooking/CreateBooking";
+import CreateBooking, { ICreateBookingState } from "./CreateBooking/CreateBooking";
 import CompleteBooking from "./CompleteBooking/CompleteBooking";
 
 export interface ICheckBookingState {
     date: any,
     time: any,
     numberOfGuests: any,
+    bookingOk: boolean,
 }
 
 export interface ICreateBooking {
@@ -18,7 +19,7 @@ export interface ICreateBooking {
 
 interface IBookingState {
     checkReservation: ICheckBookingState,
-    createReservation: ICreateBooking,
+    createReservation: ICreateBookingState,
 }
 
 const axios = require('axios');
@@ -33,6 +34,7 @@ class Booking extends React.Component<{}, IBookingState>  {
                 date: '',
                 time: '',
                 numberOfGuests: '',
+                bookingOk: false
             },
             createReservation: {
                 bookingName: '',
@@ -43,13 +45,15 @@ class Booking extends React.Component<{}, IBookingState>  {
 
         this.handleCheckBookingChange = this.handleCheckBookingChange.bind(this);
         this.handleCheckBooking = this.handleCheckBooking.bind(this);
+
+        this.handleCreateBooking = this.handleCreateBooking.bind(this);
+        this.handleCreateBookingChange = this.handleCreateBookingChange.bind(this);
     }
     
     checkCustomerUrl = 'http://localhost:8888/api/checkBookingApi.php';
     postCustomerUrl = 'http://localhost:8888/api/postBookingApi.php';
 
-    handleCheckBooking(e: any) {
-
+    handleCheckBooking() {
         let inputData = {
             date: this.state.checkReservation.date,
             numberOfGuests: this.state.checkReservation.numberOfGuests,
@@ -60,13 +64,35 @@ class Booking extends React.Component<{}, IBookingState>  {
             headers: { 'Content-Type': 'text/plain;' }
         }).then((response: any) => {
             if (response.data.length > 1) {
-                console.log("fullt")
+                alert("The selected date and time are not available. Select another time or date")
             } else {
-                console.log("du får boka")
+                this.setState({
+                    checkReservation: {
+                          ...this.state.checkReservation,
+                          bookingOk: !this.state.checkReservation.bookingOk
+                    }
+                })
+                
             }
         }).catch((error: any) => {
             console.log(error)
         })
+    }
+
+    handleCreateBooking() {
+        // let inputData = {
+        //     bookingName: this.state.createReservation.bookingName,
+        //     bookingEmail: this.state.createReservation.bookingEmail,
+        //     bookingPhone: this.state.createReservation.bookingPhone,
+        // }
+
+        // axios.post(this.postCustomerUrl, inputData, {
+        //     headers: { 'Content-Type': 'text/plain;' }
+        // }).then((response: any) => {
+        //     console.log(response.data)
+        // }).catch((error: any) => {
+        //     console.log(error)
+        // })
     }
 
     handleCheckBookingChange(e: any) {
@@ -81,26 +107,33 @@ class Booking extends React.Component<{}, IBookingState>  {
         })
     }
 
+    handleCreateBookingChange(e: any) {
+        const target = e.target;
+        const name = target.name;
+
+        this.setState({
+            createReservation: {
+                  ...this.state.createReservation,
+                  [name]: e.target.value
+            }
+        })
+    }
+
     render() {
         console.log(this.state)
-
-
         return (
             <div className="container">
                 <CheckBooking 
-                    // date={this.state.checkReservation} 
-                    // time={this.state.time} 
-                    // numberOfGuests={this.state.numberOfGuests} 
                     handleCheckBooking={this.handleCheckBooking}
                     handleCheckBookingChange={this.handleCheckBookingChange}/>
 
-                {/* <CreateBooking
-                    booking={this.state.checkReservation}
-                    // bookingDate={this.state.date}
-                    // bookingTime={this.state.time}
-                    // bookingGuests={this.state.numberOfGuests}
-                    />
-                <CompleteBooking /> */}
+                    {this.state.checkReservation.bookingOk && <CreateBooking
+                        bookingDate={this.state.checkReservation.date}
+                        bookingGuests={this.state.checkReservation.numberOfGuests}
+                        bookingTime={this.state.checkReservation.time}
+                        handleCreateBooking={this.handleCreateBooking}
+                        handleCreateBookingChange={this.handleCreateBookingChange}/> }
+
             </div>
         )
     }

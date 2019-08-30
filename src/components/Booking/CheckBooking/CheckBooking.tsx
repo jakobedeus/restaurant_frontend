@@ -1,18 +1,12 @@
 import React from "react";
 import './scss/CheckBooking.scss';
 
-interface ICheckBookingState {
-    date: any,
-    time: any,
-    numberOfGuests: any,
-}
-
 interface ICheckBookingProps {
     handleCheckBooking(e: any): void;
     handleCheckBookingChange(e: any): void;
 }
 
-class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingState>  {
+class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
 
     constructor(props: any) {
         super(props);
@@ -43,7 +37,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="date"
+                                    name="bookingDate"
                                     placeholder="Date"
                                     onChange={this.handleChange}
                                 />
@@ -56,10 +50,10 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                             </label>
                             <div className="col-md-10">
                                 <label htmlFor="time18">18.00</label>
-                                <input type="radio" name="time" id="time18" value="18" onChange={this.handleChange} />
+                                <input type="radio" name="bookingTime" id="time18" value="18" onChange={this.handleChange} />
 
                                 <label htmlFor="time21">21.00</label>
-                                <input type="radio" name="time" id="time21" value="21" onChange={this.handleChange} />
+                                <input type="radio" name="bookingTime" id="time21" value="21" onChange={this.handleChange} />
 
                             </div>
                         </div>
@@ -72,7 +66,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="numberOfGuests"
+                                    name="bookingNumberOfGuests"
                                     placeholder="Number of guests"
                                     onChange={this.handleChange}
                                 />

@@ -3,13 +3,8 @@ import './scss/CreateBooking.scss';
 
 const axios = require('axios');
 
-export interface ICreateBookingState {
-    bookingName: string,
-    bookingPhone: any,
-    bookingEmail: any,
-}
 
-export interface ICreateBookingProps {
+interface ICreateBookingProps {
     bookingDate: any,
     bookingTime: any,
     bookingGuests: any,
@@ -17,7 +12,7 @@ export interface ICreateBookingProps {
     handleCreateBookingChange(e: any): void;
 }
 
-class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingState>  {
+class CreateBooking extends React.Component<ICreateBookingProps, {}>  {
 
     postCustomerUrl = 'http://localhost:8888/api/postBookingApi.php';
 

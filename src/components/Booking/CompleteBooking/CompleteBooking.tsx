@@ -8,7 +8,7 @@ interface ICompleteBookingProps {
 class CompleteBooking extends React.Component<ICompleteBookingProps, {}>  {
     constructor(props: any) {
         super(props);
-        this.newBooking = this.newBooking.bind(this);
+        this.newBooking = this.newBooking.bind(this); 
     }
 
     newBooking() {

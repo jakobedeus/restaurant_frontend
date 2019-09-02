@@ -11,7 +11,8 @@ interface IBookingState {
     bookingName: any,
     bookingPhone: any,
     bookingEmail: any,
-    bookingOk: boolean,
+    bookingCheckOk: boolean,
+    bookingCreateOk: boolean,
 }
 
 const axios = require('axios');
@@ -28,7 +29,8 @@ class Booking extends React.Component<{}, IBookingState>  {
             bookingName: '',
             bookingPhone: '',
             bookingEmail: '',
-            bookingOk: false,
+            bookingCheckOk: false,
+            bookingCreateOk: false,
         }
 
         this.handleCheckBookingChange = this.handleCheckBookingChange.bind(this);
@@ -36,6 +38,8 @@ class Booking extends React.Component<{}, IBookingState>  {
 
         this.handleCreateBooking = this.handleCreateBooking.bind(this);
         this.handleCreateBookingChange = this.handleCreateBookingChange.bind(this);
+
+        this.handleNewBooking = this.handleNewBooking.bind(this);
     }
 
     checkBookingUrl = 'http://localhost:8888/api/checkBooking.php';
@@ -56,7 +60,7 @@ class Booking extends React.Component<{}, IBookingState>  {
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({
-                    bookingOk: !this.state.bookingOk
+                    bookingCheckOk: !this.state.bookingCheckOk
                 })
                 console.log(response)
 
@@ -64,8 +68,6 @@ class Booking extends React.Component<{}, IBookingState>  {
         }).catch((error: any) => {
             console.log(error)
         })
-
-
     }
 
     handleCreateBooking() {
@@ -77,11 +79,12 @@ class Booking extends React.Component<{}, IBookingState>  {
             bookingNumberOfGuests: this.state.bookingNumberOfGuests,
             bookingTime: this.state.bookingTime,
         }
-
         axios.post(this.postBookingUrl, inputData, {
             headers: { 'Content-Type': 'text/plain;' }
         }).then((response: any) => {
             console.log(response.data)
+            console.log("Booking created")
+            this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
         }).catch((error: any) => {
             console.log(error)
         })
@@ -92,8 +95,8 @@ class Booking extends React.Component<{}, IBookingState>  {
         const value = target.value;
         const name = target.name;
 
-        this.setState({	
-            [name]: value	
+        this.setState({
+            [name]: value
         } as Pick<IBookingState, keyof IBookingState>)
     }
 
@@ -102,25 +105,38 @@ class Booking extends React.Component<{}, IBookingState>  {
         const value = target.value;
         const name = target.name;
 
-        this.setState({	
-            [name]: value	
+        this.setState({
+            [name]: value
         } as Pick<IBookingState, keyof IBookingState>)
+    }
+
+    handleNewBooking() {
+        this.setState({ bookingCheckOk: false, bookingCreateOk: false})
+
     }
 
     render() {
         console.log(this.state)
         return (
             <div className="container">
-                <CheckBooking
+
+                {!this.state.bookingCreateOk && <CheckBooking
                     handleCheckBooking={this.handleCheckBooking}
                     handleCheckBookingChange={this.handleCheckBookingChange} />
+                }
 
-                {this.state.bookingOk && <CreateBooking
+                {this.state.bookingCheckOk && !this.state.bookingCreateOk && <CreateBooking
                     bookingDate={this.state.bookingDate}
                     bookingGuests={this.state.bookingNumberOfGuests}
                     bookingTime={this.state.bookingTime}
                     handleCreateBooking={this.handleCreateBooking}
                     handleCreateBookingChange={this.handleCreateBookingChange} />}
+
+                {this.state.bookingCreateOk &&
+                    <CompleteBooking
+                    handleNewBooking={this.handleNewBooking}
+                    />
+                }
 
             </div>
         )

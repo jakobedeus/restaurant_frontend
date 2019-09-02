@@ -5,7 +5,14 @@ import ListBookings from "./ListBookings/ListBookings";
 const axios = require('axios');
 
 interface IAdminState {
-	formDisplay: any;
+	editBookingDate: any,
+    editBookingTime: any,
+    editBookingNumberOfGuests: any,
+    editbookingName: any,
+    editbookingPhone: any,
+	editbookingEmail: any,
+	formDisplay: boolean;
+	showEditReservation: boolean;
 	reservations: [];
 }
 
@@ -16,12 +23,22 @@ class Admin extends React.Component<{}, IAdminState>  {
 	constructor(props: any) {
 		super(props)
 		this.state = {
+			editBookingDate: '',
+			editBookingTime: '',
+			editBookingNumberOfGuests: '',
+			editbookingName: '',
+			editbookingPhone: '',
+			editbookingEmail: '',
 			formDisplay: false,
-			reservations: []
+			reservations: [],
+			showEditReservation: false,
 		}
 
 		this.toggleForm = this.toggleForm.bind(this);
 		this.removeReservation = this.removeReservation.bind(this);
+		this.editReservation = this.editReservation.bind(this);
+		this.handleChangeEditBooking = this.handleChangeEditBooking.bind(this);
+		this.handleEditBooking = this.handleEditBooking.bind(this);
 	}
 
 	toggleForm() {
@@ -49,14 +66,54 @@ class Admin extends React.Component<{}, IAdminState>  {
 				{ data : 
 					JSON.stringify({ ReservationID: ReservationID })
 				}).then((response:any ) => {
-
-			  this.state.reservations.splice(ReservationID, 1);
+					this.state.reservations.map( (item, index) => (
+						this.state.reservations.splice(index, 1)
+					))
 			  this.setState({ reservations: this.state.reservations });
 		  });
 	}
 
+	editReservation(ReservationID: number) {
+		this.setState({
+			showEditReservation: !this.state.showEditReservation
+		})
+	}
+
+	changeEditBooking(e: any) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        } as Pick<IAdminState, keyof IAdminState>)
+	}
+	
+	handleChangeEditBooking() {
+
+	}
+	handleEditBooking() {
+        // let inputData = {
+        //     bookingName: this.state.bookingName,
+        //     bookingEmail: this.state.bookingEmail,
+        //     bookingPhone: this.state.bookingPhone,
+        //     bookingDate: this.state.bookingDate,
+        //     bookingNumberOfGuests: this.state.bookingNumberOfGuests,
+        //     bookingTime: this.state.bookingTime,
+        // }
+        // axios.post(this.postBookingUrl, inputData, {
+        //     headers: { 'Content-Type': 'text/plain;' }
+        // }).then((response: any) => {
+        //     console.log(response.data)
+        //     console.log("Booking created")
+        //     this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
+        // }).catch((error: any) => {
+        //     console.log(error)
+        // })
+    }
 
 	render() {
+		console.log(this.state)
 		return (
 			<div>
 				<div className={
@@ -92,6 +149,11 @@ class Admin extends React.Component<{}, IAdminState>  {
 				<ListBookings 
 					reservations={this.state.reservations}
 					removeReservation={this.removeReservation}
+					editReservationProps={this.state.showEditReservation}
+					editReservationState={this.editReservation}
+					submitBooking={this.handleEditBooking}
+					handleChangeBooking={this.changeEditBooking}
+
 					/>
 			</div>
 		)

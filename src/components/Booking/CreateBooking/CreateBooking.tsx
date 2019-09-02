@@ -1,9 +1,6 @@
 import React from "react";
 import './scss/CreateBooking.scss';
 
-const axios = require('axios');
-
-
 interface ICreateBookingProps {
     bookingDate: any,
     bookingTime: any,

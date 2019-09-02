@@ -43,14 +43,14 @@ class Admin extends React.Component<{}, IAdminState>  {
 		})
 	}
 
-	removeReservation(index: number) {
+	removeReservation(ReservationID: number) {
 		axios.delete(
 			this.bookingDeleteUrl, 
 				{ data : 
-					JSON.stringify({ ReservationID: index })
+					JSON.stringify({ ReservationID: ReservationID })
 				}).then((response:any ) => {
 
-			  this.state.reservations.splice(index, 1);
+			  this.state.reservations.splice(ReservationID, 1);
 			  this.setState({ reservations: this.state.reservations });
 		  });
 	}

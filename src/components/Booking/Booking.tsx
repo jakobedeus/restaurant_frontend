@@ -40,6 +40,7 @@ class Booking extends React.Component<{}, IBookingState>  {
         this.handleCreateBookingChange = this.handleCreateBookingChange.bind(this);
 
         this.handleNewBooking = this.handleNewBooking.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     checkBookingUrl = 'http://localhost:8888/api/checkBooking.php';
@@ -49,7 +50,7 @@ class Booking extends React.Component<{}, IBookingState>  {
 
         axios.get(this.checkBookingUrl, {
             params: {
-                bookingDate: this.state.bookingDate,
+                bookingDate: JSON.stringify(this.state.bookingDate),
                 bookingNumberOfGuests: this.state.bookingNumberOfGuests,
                 bookingTime: this.state.bookingTime,
             }
@@ -115,6 +116,12 @@ class Booking extends React.Component<{}, IBookingState>  {
 
     }
 
+    handleSelect(e:any) {
+        this.setState({
+            bookingNumberOfGuests: e.target.value,
+        });
+     }
+
     render() {
         console.log(this.state)
         return (
@@ -122,7 +129,9 @@ class Booking extends React.Component<{}, IBookingState>  {
 
                 {!this.state.bookingCreateOk && <CheckBooking
                     handleCheckBooking={this.handleCheckBooking}
-                    handleCheckBookingChange={this.handleCheckBookingChange} />
+                    handleCheckBookingChange={this.handleCheckBookingChange}
+                    selectOnChange={this.handleSelect}
+                    numberOfGuestsState={this.state.bookingNumberOfGuests}  />
                 }
 
                 {this.state.bookingCheckOk && !this.state.bookingCreateOk && <CreateBooking

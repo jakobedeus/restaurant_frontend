@@ -4,6 +4,8 @@ import './scss/CheckBooking.scss';
 interface ICheckBookingProps {
     handleCheckBooking(e: any): void;
     handleCheckBookingChange(e: any): void;
+    selectOnChange(e: any): void;
+    numberOfGuestsState: string;
 }
 
 class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
@@ -12,6 +14,12 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+    }
+
+    handleSelectChange(e:any) {
+        e.preventDefault();
+        this.props.selectOnChange(e);
     }
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -35,7 +43,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                         </label>
                             <div className="col-md-10">
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control"
                                     name="bookingDate"
                                     placeholder="Date"
@@ -63,13 +71,14 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                                 Guests
                         </label>
                             <div className="col-md-10">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="bookingNumberOfGuests"
-                                    placeholder="Number of guests"
-                                    onChange={this.handleChange}
-                                />
+                                <select name="bookingNumberOfGuests" onChange={this.handleSelectChange} value={this.props.numberOfGuestsState}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
                             </div>
                         </div>
 

@@ -8,27 +8,30 @@ interface IAdminState {
 	editBookingDate: any,
     editBookingTime: any,
     editBookingNumberOfGuests: any,
-    editbookingName: any,
-    editbookingPhone: any,
-	editbookingEmail: any,
+    editBookingName: any,
+    editBookingPhone: any,
+	editBookingEmail: any,
+	editBookingID: any,
 	formDisplay: boolean;
 	showEditReservation: boolean;
-	reservations: [];
+	reservations: any[];
 }
 
 class Admin extends React.Component<{}, IAdminState>  {
 
 	getBookingsUrl = 'http://localhost:8888/api/getBookings.php';
 	bookingDeleteUrl = 'http://localhost:8888/api/deleteBooking.php';
+	bookingEditUrl = 'http://localhost:8888/api/updateBooking.php';
 	constructor(props: any) {
 		super(props)
 		this.state = {
 			editBookingDate: '',
 			editBookingTime: '',
 			editBookingNumberOfGuests: '',
-			editbookingName: '',
-			editbookingPhone: '',
-			editbookingEmail: '',
+			editBookingName: '',
+			editBookingPhone: '',
+			editBookingEmail: '',
+			editBookingID: '',
 			formDisplay: false,
 			reservations: [],
 			showEditReservation: false,
@@ -37,8 +40,8 @@ class Admin extends React.Component<{}, IAdminState>  {
 		this.toggleForm = this.toggleForm.bind(this);
 		this.removeReservation = this.removeReservation.bind(this);
 		this.editReservation = this.editReservation.bind(this);
-		this.handleChangeEditBooking = this.handleChangeEditBooking.bind(this);
 		this.handleEditBooking = this.handleEditBooking.bind(this);
+		this.changeEditBooking = this.changeEditBooking.bind(this);
 	}
 
 	toggleForm() {
@@ -73,47 +76,61 @@ class Admin extends React.Component<{}, IAdminState>  {
 		  });
 	}
 
-	editReservation(ReservationID: number) {
+	editReservation(item: any) {
+		console.log(item);
+
+		// console.log(this.state)
+
 		this.setState({
-			showEditReservation: !this.state.showEditReservation
+			editBookingDate: item.Date,
+			editBookingTime: item.Time,
+			editBookingName: item.Name,
+			editBookingEmail: item.Email,
+			editBookingPhone: item.Phone,
+			editBookingNumberOfGuests: item.Guests,
+			editBookingID: item.ReservationID,
 		})
+
+		console.log(this.state)
 	}
 
 	changeEditBooking(e: any) {
-        const target = e.target;
+		const target = e.target;
         const value = target.value;
         const name = target.name;
 
         this.setState({
             [name]: value
         } as Pick<IAdminState, keyof IAdminState>)
+        
 	}
 	
-	handleChangeEditBooking() {
+	handleEditBooking(e: any) {
+		console.log("State:" + this.state);
+        const inputData = {
+            editBookingName: this.state.editBookingName,
+            editBookingEmail: this.state.editBookingEmail,
+            editBookingPhone: this.state.editBookingPhone,
+            editBookingDate: this.state.editBookingDate,
+            editBookingNumberOfGuests: this.state.editBookingNumberOfGuests,
+			editBookingTime: this.state.editBookingTime,
+			editBookingID: this.state.editBookingID
+		}
 
-	}
-	handleEditBooking() {
-        // let inputData = {
-        //     bookingName: this.state.bookingName,
-        //     bookingEmail: this.state.bookingEmail,
-        //     bookingPhone: this.state.bookingPhone,
-        //     bookingDate: this.state.bookingDate,
-        //     bookingNumberOfGuests: this.state.bookingNumberOfGuests,
-        //     bookingTime: this.state.bookingTime,
-        // }
-        // axios.post(this.postBookingUrl, inputData, {
+		console.log("Hej" + inputData);
+		
+        // axios.put(this.bookingEditUrl, inputData, {
         //     headers: { 'Content-Type': 'text/plain;' }
         // }).then((response: any) => {
         //     console.log(response.data)
-        //     console.log("Booking created")
-        //     this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
+        //     console.log("Edit booking saved")
+        //     // this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
         // }).catch((error: any) => {
         //     console.log(error)
         // })
     }
 
 	render() {
-		console.log(this.state)
 		return (
 			<div>
 				<div className={
@@ -153,6 +170,14 @@ class Admin extends React.Component<{}, IAdminState>  {
 					editReservationState={this.editReservation}
 					submitBooking={this.handleEditBooking}
 					handleChangeBooking={this.changeEditBooking}
+
+					editBookingID={this.state.editBookingID}
+					editBookingDate={this.state.editBookingDate}
+					editBookingTime={this.state.editBookingTime}
+					editBookingNumberOfGuests={this.state.editBookingNumberOfGuests}
+					editBookingName={this.state.editBookingName}
+					editBookingPhone={this.state.editBookingPhone}
+					editBookingEmail={this.state.editBookingEmail}
 
 					/>
 			</div>

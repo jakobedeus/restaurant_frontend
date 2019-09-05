@@ -72,23 +72,35 @@ class Booking extends React.Component<{}, IBookingState>  {
     }
 
     handleCreateBooking() {
-        let inputData = {
+        // let inputData = {
+        //     bookingName: this.state.bookingName,
+        //     bookingEmail: this.state.bookingEmail,
+        //     bookingPhone: this.state.bookingPhone,
+        //     bookingDate: this.state.bookingDate,
+        //     bookingNumberOfGuests: this.state.bookingNumberOfGuests,
+        //     bookingTime: this.state.bookingTime,
+        // }
+
+        this.setState({
             bookingName: this.state.bookingName,
             bookingEmail: this.state.bookingEmail,
             bookingPhone: this.state.bookingPhone,
             bookingDate: this.state.bookingDate,
             bookingNumberOfGuests: this.state.bookingNumberOfGuests,
             bookingTime: this.state.bookingTime,
-        }
-        axios.post(this.postBookingUrl, inputData, {
-            headers: { 'Content-Type': 'text/plain;' }
-        }).then((response: any) => {
-            console.log(response.data)
-            console.log("Booking created")
-            this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
-        }).catch((error: any) => {
-            console.log(error)
-        })
+        }, () => { 
+            axios.post(this.postBookingUrl, this.state, {
+                headers: { 'Content-Type': 'text/plain;' }
+            }).then((response: any) => {
+                console.log(response.data)
+                console.log("Booking created")
+                this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
+            }).catch((error: any) => {
+                console.log(error)
+            })
+        });
+
+        
     }
 
     handleCheckBookingChange(e: any) {

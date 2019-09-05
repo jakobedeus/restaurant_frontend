@@ -2,110 +2,171 @@ import React from "react";
 import './scss/ListBookings.scss';
 
 interface IListBookingProps {
-    reservations: any[];
-    removeReservation(index: any): any;
-    editReservationState(index: any): any;
-    submitBooking(e: any): any;
-    handleChangeBooking(e: any): any;
-    editReservationProps: boolean;
-
-    editBookingDate: '',
-	editBookingTime: '',
-	editBookingNumberOfGuests: '',
-	editBookingName: '',
-	editBookingPhone: '',
-    editBookingEmail: '',
-    editBookingID: '',
+    reservationProps: IListBookingDetails[],
+    removeReservation(index: any): any,
+    editReservationState(index: any): any,
+    submitBooking(dataToBeEdited: any): void,
+    editReservationProps: boolean,
 }
 
-class ListBookings extends React.Component<IListBookingProps, {}>  {
+export interface IListBookingDetails {
+    Date: any,
+    Time: any,
+    Guests: any,
+    Name: any,
+    Phone: any,
+    Email: any,
+    ReservationID: any,
+    CustomerID: any,
+    isInEditMode: boolean;
+}
+
+interface IListBookingState {
+    editReservationProps: boolean,
+    reservationsState: IListBookingDetails[]
+}
+
+class ListBookings extends React.Component<IListBookingProps, IListBookingState>  {
 
     constructor(props: any) {
         super(props);
-        
-        this.handleEditChange = this.handleEditChange.bind(this);
+
+        this.state = {
+            reservationsState: [],
+            editReservationProps: false
+        }
+
+        this.handleEditNameChange = this.handleEditNameChange.bind(this);
+        this.handleEditDateChange = this.handleEditDateChange.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
-        // this.submitEditBooking = this.submitEditBooking.bind(this);
+        // this.handleEditReservation = this.handleEditReservation.bind(this);
     }
 
     handleRemoveReservation(index: number) {
         this.props.removeReservation(index)
     }
 
-    handleEditReservation(index: number) {
-        this.props.editReservationState(index)
+    handleEditReservation(index: any): void {
+        let reservations = this.state.reservationsState;
+        reservations[index].isInEditMode = true;
+        this.setState({ reservationsState: reservations });
+        // this.props.submitBooking(index)
     }
 
-    handleEditChange(e: React.ChangeEvent<HTMLInputElement>) {
-        // e.preventDefault();
-        this.props.handleChangeBooking(e);
+    handleEditNameChange(e: any) {
+        // const change = {};
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        // change[name] = e.target.value;
+        // console.log(this.state.reservationsState[target.tabIndex].Name)
+
+        let reservations = this.state.reservationsState;
+        reservations[target.tabIndex]= value;
+       console.log(reservations[target.tabIndex]);
+        // console.log("hardcoded", reservations[target.tabIndex].Name)
+
+        this.setState({
+            reservationsState: reservations
+        });
+/* 
+        this.setState({ reservationsState: {[name]: value}
+        } as Pick<IListBookingState, keyof IListBookingState>) */
     }
 
-    submitEditBooking(e: { preventDefault: () => void; }) {
-        e.preventDefault();
-        this.props.submitBooking(e);
+    handleEditDateChange(e: any) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        let reservations = this.state.reservationsState;
+        reservations[target.tabIndex].Date = value;
+
+        this.setState({
+            reservationsState: reservations
+        });
+    }
+
+
+    submitEditBooking(dataToBeEdited: any): void {
+        this.props.submitBooking(dataToBeEdited);
     }
 
     handleSelectChange(e: any) {
         e.preventDefault();
-        // this.props.handleChangeBooking(e);
+    }
+
+
+    componentDidUpdate(prevProps: any) {
+        if (this.props.reservationProps != null && prevProps.reservationProps !== this.props.reservationProps) {
+            this.setState({
+                reservationsState: this.props.reservationProps
+            });
+        }
     }
 
     render() {
-        const reservationList = this.props.reservations.map((item, index) => (
-            <li key={index}>
-                ReservationID: {item.ReservationID}
-                Name: {item.Name}
-                Email: {item.Email}
-                Phone: {item.Phone}
-                Date: {item.Date}
-                Time: {item.Time}
-                Guests: {item.Guests}
-                <button onClick={this.handleRemoveReservation.bind(this, item.ReservationID)}>Remove</button>
-                <button onClick={this.handleEditReservation.bind(this, item)}>Edit</button>
-            </li>
-        ))
+        let reservationListPresentation: any[] = [];
 
-        const editReservationList = this.props.reservations.map((item, index) => (            
-            <li key={index}>
-                
-                <form action="" onSubmit={this.submitEditBooking.bind(this)}>
-                    ReservationID: {item.ReservationID}
-                    <input type="text" name="editBookingName" id="" value={this.props.editBookingName} onChange={this.handleEditChange} />
-                    <input type="text" name="editBookingEmail" id="" value={this.props.editBookingEmail} onChange={this.handleEditChange} />
-                    <input type="text" name="editBookingPhone" id="" value={this.props.editBookingPhone} onChange={this.handleEditChange} />
-                    <input type="date" name="editBookingDate" id="" value={this.props.editBookingDate}  onChange={this.handleEditChange}/>
-                    
-                    <select name="bookingTime" value={item.Time} onChange={this.handleSelectChange}>
-                        <option value="18">18</option>
-                        <option value="21">21</option>
-                    </select>
+        for (let index = 0; index < this.state.reservationsState.length; index++) {
 
-                    <select name="bookingNumberOfGuests" value={item.Guests} onChange={this.handleSelectChange}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-                    <button type="submit">Save</button>
-                </form>
-            </li>
-        ))
+            if (!this.state.reservationsState[index].isInEditMode) {
+                reservationListPresentation.push(
+                    <li key={index}>
+                        ReservationID: {this.state.reservationsState[index].ReservationID}
+                        Name: {this.state.reservationsState[index].Name}
+                        Email: {this.state.reservationsState[index].Email}
+                        Phone: {this.state.reservationsState[index].Phone}
+                        Date: {this.state.reservationsState[index].Date}
+                        Time: {this.state.reservationsState[index].Time}
+                        Guests: {this.state.reservationsState[index].Guests}
+                        <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)}>Remove</button>
+                        <button
+                            onClick={this.handleEditReservation.bind(this, index)
+                            }>Edit</button>
+                    </li>
+                )
+            }
+            else {
+                reservationListPresentation.push(
+                    <li key={index}>
+                        <form onSubmit={this.submitEditBooking.bind(this, this.state.reservationsState[index])}>
+                            ReservationID: {this.state.reservationsState[index].ReservationID}
+                            <input type="text" name="Name" tabIndex={index} id="" value={this.state.reservationsState[index].Name} onChange={this.handleEditNameChange} />
+                            <input type="text" name="Email" tabIndex={index} id="" value={this.state.reservationsState[index].Email} onChange={this.handleEditNameChange} />
+                            <input type="text" name="Phone" tabIndex={index} id="" value={this.state.reservationsState[index].Phone} onChange={this.handleEditNameChange} />
+                            <input type="date" name="Date" tabIndex={index} id="" value={this.state.reservationsState[index].Date} onChange={this.handleEditNameChange} />
 
+                            <select name="Time" value={this.state.reservationsState[index].Time} tabIndex={index} onChange={this.handleSelectChange}>
+                                <option value="18">18</option>
+                                <option value="21">21</option>
+                            </select>
+
+                            <select name="Guests" tabIndex={index} value={this.state.reservationsState[index].Guests} onChange={this.handleSelectChange}>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                            <button type="submit">Save</button>
+                        </form>
+                    </li>
+                )
+            }
+        }
+
+        let output = reservationListPresentation;
 
         return (
             <div>
                 <ul>
-                    {this.props.editReservationProps && editReservationList}
-                    {!this.props.editReservationProps && reservationList}
+                    {output}
                 </ul>
             </div>
+
         )
     }
-
-
 }
 
 export default ListBookings;

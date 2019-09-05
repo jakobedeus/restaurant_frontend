@@ -25,6 +25,10 @@ export interface ICreateBookingErrors {
     bookingEmail: any,
 }
 
+
+const validEmailRegex =
+RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+
 class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingState>  {
 
     postCustomerUrl = 'http://localhost:8888/api/postBookingApi.php';
@@ -72,11 +76,52 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
         });
     }
 
+    handleEmailChange = (e: any) => {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        } as Pick<ICreateBookingState, keyof ICreateBookingState>, () => {
+            this.validateEmail();
+        });
+    };
+
+    validateEmail = () => {
+        const { bookingEmail } = this.state;
+        this.setState({
+            errorEmail:
+                // bookingEmail.length > 3 ? null : 'Name must be longer than 3 characters'
+                validEmailRegex.test(bookingEmail) ? null : 'Email is wrong'
+        });
+    }
+
+    handlePhoneChange = (e: any) => {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        } as Pick<ICreateBookingState, keyof ICreateBookingState>, () => {
+            this.validatePhone();
+        });
+    };
+
+    validatePhone = () => {
+        const { bookingPhone } = this.state;
+        this.setState({
+            errorPhone:
+                bookingPhone.length > 7 ? null : 'Not a valid number, min 7 digits'
+        });
+    }
+
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        const { bookingName } = this.state;
-        alert(`Your state values: \n 
-                name: ${bookingName}`);
+        // const { bookingName } = this.state;
+        // alert(`Your state values: \n 
+        //         name: ${bookingName}`);
         this.props.handleCreateBooking(e);
     }
 
@@ -118,11 +163,14 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                             <div className="col-md-10">
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${this.state.errorPhone ? 'is-invalid' : ''}`}
                                     name="bookingPhone"
+                                    value={this.state.bookingPhone}
                                     placeholder="Customer's Phone"
-                                    onChange={this.handleChange}
+                                    onChange={this.handlePhoneChange}
+                                    onBlur={this.validatePhone}
                                 />
+                                <div className='invalid-feedback'>{this.state.errorPhone}</div>
                             </div>
                         </div>
 
@@ -133,12 +181,16 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                             <div className="col-md-10">
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${this.state.errorEmail ? 'is-invalid' : ''}`}
                                     name="bookingEmail"
+                                    value={this.state.bookingEmail}
                                     placeholder="Customer'email"
-                                    onChange={this.handleChange}
+                                    onChange={this.handleEmailChange}
+                                    onBlur={this.validateEmail}
                                 />
+                                <div className='invalid-feedback'>{this.state.errorEmail}</div>
                             </div>
+                            
                         </div>
 
                         <div className="form-group form-row mb-0">

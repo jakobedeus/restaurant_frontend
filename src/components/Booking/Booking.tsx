@@ -20,11 +20,6 @@ interface IBookingState {
 
 const axios = require('axios');
 
-const validEmailRegex =
-RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-
-
-
 class Booking extends React.Component<{}, IBookingState>  {
 
     constructor(props: any) {

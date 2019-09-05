@@ -1,6 +1,5 @@
 import React from "react";
 import './scss/Admin.scss';
-import { FaPlus } from 'react-icons/fa';
 import ListBookings from "./ListBookings/ListBookings";
 const axios = require('axios');
 
@@ -86,7 +85,7 @@ class Admin extends React.Component<{}, IAdminState>  {
 		});
 	}
 
-	handleEditBooking(dataToBeEdited: any) {
+	handleEditBooking =(dataToBeEdited: any)=> {
 		console.log(dataToBeEdited);
 
 		axios.put(this.bookingEditUrl, dataToBeEdited, {

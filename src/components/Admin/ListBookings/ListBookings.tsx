@@ -60,9 +60,9 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         const name = target.name;
         // change[name] = e.target.value;
         // console.log(this.state.reservationsState[target.tabIndex].Name)
-
+   //check the value ..... 
         let reservations = this.state.reservationsState;
-        reservations[target.tabIndex]= value;
+        reservations[target.tabIndex].Name= value;
        console.log(reservations[target.tabIndex]);
         // console.log("hardcoded", reservations[target.tabIndex].Name)
 
@@ -134,7 +134,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                             <input type="text" name="Name" tabIndex={index} id="" value={this.state.reservationsState[index].Name} onChange={this.handleEditNameChange} />
                             <input type="text" name="Email" tabIndex={index} id="" value={this.state.reservationsState[index].Email} onChange={this.handleEditNameChange} />
                             <input type="text" name="Phone" tabIndex={index} id="" value={this.state.reservationsState[index].Phone} onChange={this.handleEditNameChange} />
-                            <input type="date" name="Date" tabIndex={index} id="" value={this.state.reservationsState[index].Date} onChange={this.handleEditNameChange} />
+                            <input type="date" name="Date" tabIndex={index} id="" value={this.state.reservationsState[index].Date} onChange={this.handleEditDateChange} />
 
                             <select name="Time" value={this.state.reservationsState[index].Time} tabIndex={index} onChange={this.handleSelectChange}>
                                 <option value="18">18</option>

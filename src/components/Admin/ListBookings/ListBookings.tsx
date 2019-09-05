@@ -38,6 +38,8 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
 
         this.handleEditNameChange = this.handleEditNameChange.bind(this);
         this.handleEditDateChange = this.handleEditDateChange.bind(this);
+        this.handleEditTimeChange = this.handleEditTimeChange.bind(this);
+        this.handleEditGuestChange = this.handleEditGuestChange.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
         // this.handleEditReservation = this.handleEditReservation.bind(this);
     }
@@ -80,6 +82,32 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         const name = target.name;
         let reservations = this.state.reservationsState;
         reservations[target.tabIndex].Date = value;
+
+        this.setState({
+            reservationsState: reservations
+        });
+    }
+
+    handleEditTimeChange(e: any) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        console.log(value);
+        let reservations = this.state.reservationsState;
+        reservations[target.tabIndex].Time = value;
+
+        this.setState({
+            reservationsState: reservations
+        });
+    }
+
+    handleEditGuestChange(e: any) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        console.log(value);
+        let reservations = this.state.reservationsState;
+        reservations[target.tabIndex].Guests = value;
 
         this.setState({
             reservationsState: reservations
@@ -136,12 +164,12 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                             <input type="text" name="Phone" tabIndex={index} id="" value={this.state.reservationsState[index].Phone} onChange={this.handleEditNameChange} />
                             <input type="date" name="Date" tabIndex={index} id="" value={this.state.reservationsState[index].Date} onChange={this.handleEditDateChange} />
 
-                            <select name="Time" value={this.state.reservationsState[index].Time} tabIndex={index} onChange={this.handleSelectChange}>
+                            <select name="Time" value={this.state.reservationsState[index].Time} tabIndex={index} onChange={this.handleEditTimeChange}>
                                 <option value="18">18</option>
                                 <option value="21">21</option>
                             </select>
 
-                            <select name="Guests" tabIndex={index} value={this.state.reservationsState[index].Guests} onChange={this.handleSelectChange}>
+                            <select name="Guests" tabIndex={index} value={this.state.reservationsState[index].Guests} onChange={this.handleEditGuestChange}>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

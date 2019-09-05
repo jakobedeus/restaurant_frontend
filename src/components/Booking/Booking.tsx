@@ -20,6 +20,11 @@ interface IBookingState {
 
 const axios = require('axios');
 
+const validEmailRegex =
+RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+
+
+
 class Booking extends React.Component<{}, IBookingState>  {
 
     constructor(props: any) {
@@ -27,8 +32,8 @@ class Booking extends React.Component<{}, IBookingState>  {
 
         this.state = {
             bookingDate: '',
-            bookingTime: '',
-            bookingNumberOfGuests: '',
+            bookingTime: '18',
+            bookingNumberOfGuests: '1',
             bookingName: '',
             bookingPhone: '',
             bookingEmail: '',
@@ -60,7 +65,6 @@ class Booking extends React.Component<{}, IBookingState>  {
         }).then((response: any) => {
             console.log(response)
             if (response.data.length > 1) {
-
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({
@@ -74,24 +78,28 @@ class Booking extends React.Component<{}, IBookingState>  {
         })
     }
 
+    
+
     handleCreateBooking() {
-        let inputData = {
-            bookingName: this.state.bookingName,
-            bookingEmail: this.state.bookingEmail,
-            bookingPhone: this.state.bookingPhone,
-            bookingDate: this.state.bookingDate,
-            bookingNumberOfGuests: this.state.bookingNumberOfGuests,
-            bookingTime: this.state.bookingTime,
-        }
-        axios.post(this.postBookingUrl, inputData, {
-            headers: { 'Content-Type': 'text/plain;' }
-        }).then((response: any) => {
-            console.log(response.data)
-            console.log("Booking created")
-            this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
-        }).catch((error: any) => {
-            console.log(error)
-        })
+        if (this.state.isCheckFormValidated) {
+            let inputData = {
+                bookingName: this.state.bookingName,
+                bookingEmail: this.state.bookingEmail,
+                bookingPhone: this.state.bookingPhone,
+                bookingDate: this.state.bookingDate,
+                bookingNumberOfGuests: this.state.bookingNumberOfGuests,
+                bookingTime: this.state.bookingTime,
+            }
+            axios.post(this.postBookingUrl, inputData, {
+                headers: { 'Content-Type': 'text/plain;' }
+            }).then((response: any) => {
+                console.log(response.data)
+                console.log("Booking created")
+                this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
+            }).catch((error: any) => {
+                console.log(error)
+            })
+        } 
     }
 
     handleCheckBookingChange(e: any) {
@@ -112,6 +120,8 @@ class Booking extends React.Component<{}, IBookingState>  {
         this.setState({
             [name]: value
         } as Pick<IBookingState, keyof IBookingState>)
+
+        
     }
 
     handleNewBooking() {
@@ -124,12 +134,7 @@ class Booking extends React.Component<{}, IBookingState>  {
             bookingNumberOfGuests: e.target.value,
         });
     }
-
-
-       
-
     render() {
-        console.log(this.state)
         return (
             <div className="container">
 

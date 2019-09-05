@@ -66,7 +66,6 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                                     name="bookingDate"
                                     placeholder="Date"
                                     onChange={this.handleDateChange}
-                                    value={moment().format('YYYY-MM-DD')}
                                 />
                             </div>
                         </div>

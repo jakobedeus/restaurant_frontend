@@ -1,6 +1,6 @@
 import React from "react";
 import './scss/Admin.scss';
-import { FaPlus } from 'react-icons/fa';
+// import { FaPlus } from 'react-icons/fa';
 import ListBookings from "./ListBookings/ListBookings";
 const axios = require('axios');
 
@@ -64,7 +64,7 @@ class Admin extends React.Component<{}, IAdminState>  {
 					(this.state.formDisplay ? '' : 'add-reservation')
 				}>
 					<div className="res-addheading" onClick={this.toggleForm}>
-						<h2> <FaPlus /> Add Reservation</h2>
+						{/* <h2> <FaPlus /> Add Reservation</h2> */}
 					</div>
 
 					<div className="form-body">

@@ -6,23 +6,41 @@ interface ICheckBookingProps {
     handleCheckBookingChange(e: any): void;
     selectOnChange(e: any): void;
     numberOfGuestsState: string;
+    isCheckFormValidated: boolean;
 }
+
+const moment = require('moment');
 
 class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
 
     constructor(props: any) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
     }
 
-    handleSelectChange(e:any) {
+    handleSelectChange(e: any) {
         e.preventDefault();
         this.props.selectOnChange(e);
     }
 
-    handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
+        var CurrentDate = moment().format('YYYY-MM-DD');
+        var GivenDate = e.target.value;
+
+        if (GivenDate > CurrentDate) {
+            e.preventDefault();
+            this.props.handleCheckBookingChange(e);
+        } else {
+            alert('You cant book in the past.');
+        }
+    }
+
+    handleTimeChange(e: React.ChangeEvent<HTMLInputElement>) {
+        
         e.preventDefault();
         this.props.handleCheckBookingChange(e);
     }
@@ -36,7 +54,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
         return (
             <div className="card textcenter mt-3">
                 <div className="card-body">
-                    <form id="aptForm" noValidate={true} onSubmit={this.handleSubmit}>
+                    <form id="aptForm" onSubmit={this.handleSubmit}>
                         <div className="form-group form-row">
                             <label className="col-md-2 col-form-label text-md-right">
                                 Date
@@ -47,7 +65,8 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                                     className="form-control"
                                     name="bookingDate"
                                     placeholder="Date"
-                                    onChange={this.handleChange}
+                                    onChange={this.handleDateChange}
+                                    value={moment().format('YYYY-MM-DD')}
                                 />
                             </div>
                         </div>
@@ -58,10 +77,10 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                             </label>
                             <div className="col-md-10">
                                 <label htmlFor="time18">18.00</label>
-                                <input type="radio" name="bookingTime" id="time18" value="18" onChange={this.handleChange} />
+                                <input type="radio" name="bookingTime" id="time18" value="18" checked onChange={this.handleTimeChange} />
 
                                 <label htmlFor="time21">21.00</label>
-                                <input type="radio" name="bookingTime" id="time21" value="21" onChange={this.handleChange} />
+                                <input type="radio" name="bookingTime" id="time21" value="21" onChange={this.handleTimeChange} />
 
                             </div>
                         </div>

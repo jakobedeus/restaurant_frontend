@@ -9,7 +9,7 @@ interface ICreateBookingProps {
     handleCreateBookingChange(e: any): void;
 }
 
-interface ICreateBookingState {
+export interface ICreateBookingState {
     bookingName: any,
     bookingEmail: any,
     bookingPhone: any,
@@ -50,26 +50,35 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
             isCheckFormValidated: false,
 
         }
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePhoneChange = this.handlePhoneChange.bind(this);
+        this.handleGDPRChange = this.handleGDPRChange.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleGDPRChange = this.handleGDPRChange.bind(this);
     }
 
-    handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
+    // handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     e.preventDefault();
 
-        this.props.handleCreateBookingChange(e);
-    }
+    //     this.props.handleCreateBookingChange(e);
+    // }
+
+    
 
     handleNameChange = (e: any) => {
         const target = e.target;
         const value = target.value;
         const name = target.name;
+        // this.props.handleCreateBookingChange(e);
 
         this.setState({
             [name]: value
         } as Pick<ICreateBookingState, keyof ICreateBookingState>, () => {
             this.validateName();
+            
         });
+
     };
 
     validateName = () => {
@@ -140,10 +149,11 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         if (this.state.bookingGDPR === true) {
-            this.props.handleCreateBooking(e);
+            this.props.handleCreateBooking(this.state);
         } else {
             this.validateGDPR(e)
         }
+
     }
 
     render() {

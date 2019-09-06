@@ -1,7 +1,7 @@
 import React from "react";
 import './scss/Booking.scss';
 import CheckBooking from "./CheckBooking/CheckBooking";
-import CreateBooking from "./CreateBooking/CreateBooking";
+import CreateBooking, { ICreateBookingState } from "./CreateBooking/CreateBooking";
 import CompleteBooking from "./CompleteBooking/CompleteBooking";
 
 interface IBookingState {
@@ -75,15 +75,11 @@ class Booking extends React.Component<{}, IBookingState>  {
 
     
 
-    handleCreateBooking() {
-        
+    handleCreateBooking(userInfo: ICreateBookingState) {
         this.setState({
-            bookingName: this.state.bookingName,
-            bookingEmail: this.state.bookingEmail,
-            bookingPhone: this.state.bookingPhone,
-            bookingDate: this.state.bookingDate,
-            bookingNumberOfGuests: this.state.bookingNumberOfGuests,
-            bookingTime: this.state.bookingTime,
+            bookingName: userInfo.bookingName,
+            bookingEmail: userInfo.bookingEmail,
+            bookingPhone: userInfo.bookingPhone,
         }, () => { 
             axios.post(this.postBookingUrl, this.state, {
 
@@ -120,9 +116,8 @@ class Booking extends React.Component<{}, IBookingState>  {
         this.setState({
             [name]: value
         } as Pick<IBookingState, keyof IBookingState>)
-
-        
     }
+
 
     handleNewBooking() {
         this.setState({ bookingCheckOk: false, bookingCreateOk: false })
@@ -135,6 +130,7 @@ class Booking extends React.Component<{}, IBookingState>  {
         });
     }
     render() {
+        console.log(this.state)
         return (
             <div className="container">
 

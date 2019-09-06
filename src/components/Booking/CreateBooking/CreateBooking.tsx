@@ -13,9 +13,11 @@ interface ICreateBookingState {
     bookingName: any,
     bookingEmail: any,
     bookingPhone: any,
+    bookingGDPR: boolean,
     errorName: any,
     errorEmail: any,
     errorPhone: any,
+    errorGDPR: any,
     isCheckFormValidated: boolean,
 }
 
@@ -27,7 +29,7 @@ export interface ICreateBookingErrors {
 
 
 const validEmailRegex =
-RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
 class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingState>  {
 
@@ -39,9 +41,11 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
             bookingName: '',
             bookingEmail: '',
             bookingPhone: '',
+            bookingGDPR: false,
             errorName: '',
             errorEmail: '',
             errorPhone: '',
+            errorGDPR: '',
 
             isCheckFormValidated: false,
 
@@ -117,16 +121,32 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
         });
     }
 
+    handleGDPRChange = (e: any) => {
+        const target = e.target;
+        const value = target.type === "checkbox" ? target.checked : target.value;
+        this.setState({ bookingGDPR: value }, () => {
+            this.validateGDPR(e);
+        });
+    };
+
+    validateGDPR = (e: any) => {
+        const { bookingGDPR } = this.state;
+        this.setState({
+            errorGDPR:
+                bookingGDPR === true ? null : 'You need to accept GDPR terms'
+        });
+    }
+
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-        // const { bookingName } = this.state;
-        // alert(`Your state values: \n 
-        //         name: ${bookingName}`);
-        this.props.handleCreateBooking(e);
+        if (this.state.bookingGDPR === true) {
+            this.props.handleCreateBooking(e);
+        } else {
+            this.validateGDPR(e)
+        }
     }
 
     render() {
-        // console.log(this.props.errorBookingName)
         return (
             <div className="card textcenter mt-3">
                 <div className="card-body">
@@ -190,7 +210,25 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                                 />
                                 <div className='invalid-feedback'>{this.state.errorEmail}</div>
                             </div>
-                            
+                        </div>
+                        <div className="form-group form-row">
+                            <label className="col-md-2 col-form-label text-md-right" htmlFor="GDPR">
+                                GDPR
+                        </label>
+                            <div className="col-md-10">
+                                <input
+                                    type="checkbox"
+                                    className={`form-control ${this.state.errorGDPR ? 'is-invalid' : ''}`}
+                                    name="GDPR"
+                                    checked={this.state.bookingGDPR}
+                                    onChange={this.handleGDPRChange}
+                                    onBlur={this.validateGDPR}
+                                />
+                                <div className='invalid-feedback'>{this.state.errorGDPR}</div>
+                            </div>
+
+
+
                         </div>
 
                         <div className="form-group form-row mb-0">

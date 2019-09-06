@@ -108,7 +108,7 @@ class Admin extends React.Component<{}, IAdminState>  {
 					(this.state.formDisplay ? '' : 'add-reservation')
 				}>
 					<div className="res-addheading" onClick={this.toggleForm}>
-						<h2> <FaPlus /> Add Reservation</h2>
+						{/* <h2> <FaPlus /> Add Reservation</h2> */}
 					</div>
 
 					<div className="form-body">

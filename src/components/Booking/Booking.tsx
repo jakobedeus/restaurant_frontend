@@ -13,7 +13,10 @@ interface IBookingState {
     bookingEmail: any,
     bookingCheckOk: boolean,
     bookingCreateOk: boolean,
+    isCheckFormValidated: boolean,
 }
+
+
 
 const axios = require('axios');
 
@@ -24,13 +27,14 @@ class Booking extends React.Component<{}, IBookingState>  {
 
         this.state = {
             bookingDate: '',
-            bookingTime: '',
-            bookingNumberOfGuests: '',
+            bookingTime: '18',
+            bookingNumberOfGuests: '1',
             bookingName: '',
             bookingPhone: '',
             bookingEmail: '',
             bookingCheckOk: false,
             bookingCreateOk: false,
+            isCheckFormValidated: false,
         }
 
         this.handleCheckBookingChange = this.handleCheckBookingChange.bind(this);
@@ -47,7 +51,6 @@ class Booking extends React.Component<{}, IBookingState>  {
     postBookingUrl = 'http://localhost:8888/api/postBooking.php';
 
     handleCheckBooking() {
-
         axios.get(this.checkBookingUrl, {
             params: {
                 bookingDate: JSON.stringify(this.state.bookingDate),
@@ -57,7 +60,6 @@ class Booking extends React.Component<{}, IBookingState>  {
         }).then((response: any) => {
             console.log(response)
             if (response.data.length > 1) {
-
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({
@@ -71,7 +73,10 @@ class Booking extends React.Component<{}, IBookingState>  {
         })
     }
 
+    
+
     handleCreateBooking() {
+
         // let inputData = {
         //     bookingName: this.state.bookingName,
         //     bookingEmail: this.state.bookingEmail,
@@ -90,6 +95,7 @@ class Booking extends React.Component<{}, IBookingState>  {
             bookingTime: this.state.bookingTime,
         }, () => { 
             axios.post(this.postBookingUrl, this.state, {
+
                 headers: { 'Content-Type': 'text/plain;' }
             }).then((response: any) => {
                 console.log(response.data)
@@ -98,9 +104,11 @@ class Booking extends React.Component<{}, IBookingState>  {
             }).catch((error: any) => {
                 console.log(error)
             })
+
         });
 
         
+
     }
 
     handleCheckBookingChange(e: any) {
@@ -121,29 +129,30 @@ class Booking extends React.Component<{}, IBookingState>  {
         this.setState({
             [name]: value
         } as Pick<IBookingState, keyof IBookingState>)
+
+        
     }
 
     handleNewBooking() {
-        this.setState({ bookingCheckOk: false, bookingCreateOk: false})
+        this.setState({ bookingCheckOk: false, bookingCreateOk: false })
 
     }
 
-    handleSelect(e:any) {
+    handleSelect(e: any) {
         this.setState({
             bookingNumberOfGuests: e.target.value,
         });
-     }
-
+    }
     render() {
-        console.log(this.state)
         return (
             <div className="container">
 
                 {!this.state.bookingCreateOk && <CheckBooking
+                    isCheckFormValidated={this.state.isCheckFormValidated}
                     handleCheckBooking={this.handleCheckBooking}
                     handleCheckBookingChange={this.handleCheckBookingChange}
                     selectOnChange={this.handleSelect}
-                    numberOfGuestsState={this.state.bookingNumberOfGuests}  />
+                    numberOfGuestsState={this.state.bookingNumberOfGuests} />
                 }
 
                 {this.state.bookingCheckOk && !this.state.bookingCreateOk && <CreateBooking
@@ -155,7 +164,7 @@ class Booking extends React.Component<{}, IBookingState>  {
 
                 {this.state.bookingCreateOk &&
                     <CompleteBooking
-                    handleNewBooking={this.handleNewBooking}
+                        handleNewBooking={this.handleNewBooking}
                     />
                 }
 

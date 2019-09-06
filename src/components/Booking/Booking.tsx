@@ -76,16 +76,7 @@ class Booking extends React.Component<{}, IBookingState>  {
     
 
     handleCreateBooking() {
-
-        // let inputData = {
-        //     bookingName: this.state.bookingName,
-        //     bookingEmail: this.state.bookingEmail,
-        //     bookingPhone: this.state.bookingPhone,
-        //     bookingDate: this.state.bookingDate,
-        //     bookingNumberOfGuests: this.state.bookingNumberOfGuests,
-        //     bookingTime: this.state.bookingTime,
-        // }
-
+        
         this.setState({
             bookingName: this.state.bookingName,
             bookingEmail: this.state.bookingEmail,

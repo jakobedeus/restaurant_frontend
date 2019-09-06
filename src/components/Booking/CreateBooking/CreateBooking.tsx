@@ -153,7 +153,7 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
         } else {
             this.validateGDPR(e)
         }
-
+ 
     }
 
     render() {

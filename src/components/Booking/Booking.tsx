@@ -76,13 +76,17 @@ class Booking extends React.Component<{}, IBookingState>  {
     
 
     handleCreateBooking(userInfo: ICreateBookingState) {
-        this.setState({
-            bookingName: userInfo.bookingName,
-            bookingEmail: userInfo.bookingEmail,
-            bookingPhone: userInfo.bookingPhone,
-        }, () => { 
-            axios.post(this.postBookingUrl, this.state, {
 
+            let postData = {
+                bookingName: userInfo.bookingName,
+                bookingEmail: userInfo.bookingEmail,
+                bookingPhone: userInfo.bookingPhone,
+                bookingDate: this.state.bookingDate,
+                bookingTime: this.state.bookingTime,
+                bookingGuests: this.state.bookingNumberOfGuests,
+            }
+
+            axios.post(this.postBookingUrl, postData, {
                 headers: { 'Content-Type': 'text/plain;' }
             }).then((response: any) => {
                 console.log(response.data)
@@ -92,7 +96,7 @@ class Booking extends React.Component<{}, IBookingState>  {
                 console.log(error)
             })
 
-        });
+        // });
 
         
 

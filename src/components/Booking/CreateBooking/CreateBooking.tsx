@@ -149,6 +149,7 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         if (this.state.bookingGDPR === true) {
+            console.log("child state")
             this.props.handleCreateBooking(this.state);
         } else {
             this.validateGDPR(e)

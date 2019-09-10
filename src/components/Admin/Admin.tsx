@@ -47,9 +47,10 @@ class Admin extends React.Component<{}, IAdminState>  {
 				reservations: response.data
 			})
 
-		}).catch((error: any) => {
-			console.log(error)
 		})
+		// .catch((error: any) => {
+		// 	// console.log(error)
+		// })
 	}
 
 	removeReservation(ReservationID: number) {

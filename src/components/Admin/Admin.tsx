@@ -65,6 +65,8 @@ class Admin extends React.Component<{}, IAdminState>  {
 				))
 				this.setState({ reservations: this.state.reservations });
 			});
+
+			
 	}
 
 	editReservation(item: any) {

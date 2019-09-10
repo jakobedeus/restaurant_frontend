@@ -154,7 +154,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                         Date: {this.state.reservationsState[index].Date}
                         Time: {this.state.reservationsState[index].Time}
                         Guests: {this.state.reservationsState[index].Guests}
-                        <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)}>Remove</button>
+                        <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)} className="removeReservation">Remove</button>
                         <button
                             onClick={this.handleEditReservation.bind(this, index)
                             }>Edit</button>

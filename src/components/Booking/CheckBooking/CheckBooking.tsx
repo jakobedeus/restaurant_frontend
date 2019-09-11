@@ -60,7 +60,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                         <div className="form-group-date form-row">
                             <label className="date">
                                 Date
-                        </label>
+                             </label>
                             <div className="date-input">
                                 <input
                                     type="date"
@@ -72,25 +72,26 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                             </div>
                         </div>
 
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right" htmlFor="time">
+                        <div className="form-group-time form-row">
+                            <label className="time">
                                 Time
                             </label>
-                            <div className="col-md-10">
+                            <div className="input-radio-group">
                                 <label htmlFor="time18">18.00</label>
                                 <input type="radio" name="bookingTime" id="time18" value="18" checked onChange={this.handleTimeChange} />
-
+                            </div>
+                            <div className="input-radio-group">
                                 <label htmlFor="time21">21.00</label>
                                 <input type="radio" name="bookingTime" id="time21" value="21" onChange={this.handleTimeChange} />
-
                             </div>
+                            
                         </div>
 
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right">
+                        <div className="form-group-guests form-row">
+                            <label className="guests">
                                 Guests
                         </label>
-                            <div className="col-md-10">
+                            <div className="input-select-guests">
                                 <select name="bookingNumberOfGuests" onChange={this.handleSelectChange} value={this.props.numberOfGuestsState}>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -104,7 +105,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                         </div>
 
                         <div className="button-check">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn-check">
                                 Check Availability
                             </button>
                         </div>

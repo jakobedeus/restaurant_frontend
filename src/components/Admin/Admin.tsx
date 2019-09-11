@@ -53,21 +53,14 @@ class Admin extends React.Component<{}, IAdminState>  {
 		// })
 	}
 
-	removeReservation(ReservationID: number) {
+	removeReservation = (ReservationID: number) =>  {
 		axios.delete(
 			this.bookingDeleteUrl,
 			{
 				data:
 					JSON.stringify({ ReservationID: ReservationID })
 			}).then((response: any) => {
-				this.state.reservations.splice(ReservationID, 1)
-				// this.state.reservations.map((item, index) => (
-				// 	console.log(index),
-				// 	this.state.reservations.splice(index, 1)
-					
-					
-				// ))
-				this.setState({ reservations: this.state.reservations });
+				this.setState({reservations: this.state.reservations.filter(item => item.ReservationID != ReservationID)});
 			});
 	}
 

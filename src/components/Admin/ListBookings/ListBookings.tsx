@@ -1,6 +1,9 @@
 import React from "react";
 import './scss/ListBookings.scss';
 
+import { FaTrashAlt } from 'react-icons/fa';
+import { FaPen } from 'react-icons/fa';
+
 interface IListBookingProps {
     reservationProps: IListBookingDetails[],
     removeReservation(index: any): any,
@@ -24,7 +27,7 @@ export interface IListBookingDetails {
 interface IListBookingState {
     editReservationProps: boolean,
     reservationsState: IListBookingDetails[],
-    
+
 }
 
 class ListBookings extends React.Component<IListBookingProps, IListBookingState>  {
@@ -141,7 +144,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
     }
 
     cancelEdit() {
-       
+
     }
 
     render() {
@@ -152,22 +155,26 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
             if (!this.state.reservationsState[index].isInEditMode) {
                 reservationListPresentation.push(
                     <li key={index}>
-                        <div>
-                            ReservationID: {this.state.reservationsState[index].ReservationID}
-                            <p>{this.state.reservationsState[index].Name}</p>
-                            <p>{this.state.reservationsState[index].Email}</p>
-                            <p>{this.state.reservationsState[index].Phone}</p>
-                        </div>
-                        <div>
-                            <p>Date: <b>{this.state.reservationsState[index].Date}</b></p>
-                            <p>Time: <b>{this.state.reservationsState[index].Time}</b></p>
-                            <p>Guests: <b>{this.state.reservationsState[index].Guests}</b></p>
-                        </div>
-                        <div>
-                            <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)}>Remove</button>
-                            <button
-                                onClick={this.handleEditReservation.bind(this, index)
-                                }>Edit</button>
+
+                        <p className="reservationNameAdmin">{this.state.reservationsState[index].Name}</p>
+                        <div className="reservationInfoContainer">
+                            <div>
+                                {/* ReservationID: {this.state.reservationsState[index].ReservationID} */}
+
+                                <p><label htmlFor="Email">EMAIL: </label><b>{this.state.reservationsState[index].Email}</b></p>
+                                <p><label htmlFor="Phone">PHONE: </label><b>{this.state.reservationsState[index].Phone}</b></p>
+                            </div>
+                            <div>
+                                <p>WHEN: <b>{this.state.reservationsState[index].Date}</b> at <b>{this.state.reservationsState[index].Time}</b></p>
+                                {/* <p>TIME: <b>{this.state.reservationsState[index].Time}</b></p> */}
+                                <p>NUMBER OF PEOPLE: <b>{this.state.reservationsState[index].Guests}</b></p>
+                            </div>
+                            <div>
+                                <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)} className="removeBtn" ><FaTrashAlt /></button>
+                                <button
+                                    onClick={this.handleEditReservation.bind(this, index)
+                                    } className="editBtn"><FaPen /></button>
+                            </div>
                         </div>
 
                     </li>
@@ -204,7 +211,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                                 </p>
                             </div>
                             <div>
-                                
+
                                 <button type="submit">Save</button>
 
                             </div>
@@ -217,7 +224,8 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         let output = reservationListPresentation;
 
         return (
-            <div>
+            <div className="reservationContainer">
+                <p className="numberOfReservations">NUMBER OF RESERVATIONS: <b>{this.state.reservationsState.length}</b></p> 
                 <ul>
                     {output}
                 </ul>

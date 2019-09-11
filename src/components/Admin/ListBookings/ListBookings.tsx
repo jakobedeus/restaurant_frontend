@@ -1,33 +1,29 @@
 import React from "react";
 import './scss/ListBookings.scss';
-
 import { FaTrashAlt } from 'react-icons/fa';
 import { FaPen } from 'react-icons/fa';
 
 interface IListBookingProps {
     reservationProps: IListBookingDetails[],
-    removeReservation(index: any): any,
-    editReservationState(index: any): any,
-    submitBooking(dataToBeEdited: any): void,
+    removeReservation(index: number): void,
+    submitBooking(dataToBeEdited: IListBookingDetails): void,
     editReservationProps: boolean,
 }
 
 export interface IListBookingDetails {
-    Date: any,
-    Time: any,
-    Guests: any,
-    Name: any,
-    Phone: any,
-    Email: any,
-    ReservationID: any,
-    CustomerID: any,
+    Date: string,
+    Time: number,
+    Guests: number,
+    Name: string,
+    Phone: number,
+    Email: string,
+    ReservationID: number,
+    CustomerID: number,
     isInEditMode: boolean;
 }
 
 interface IListBookingState {
-    editReservationProps: boolean,
-    reservationsState: IListBookingDetails[],
-
+    reservationsState: IListBookingDetails[]
 }
 
 class ListBookings extends React.Component<IListBookingProps, IListBookingState>  {
@@ -36,8 +32,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         super(props);
 
         this.state = {
-            reservationsState: [],
-            editReservationProps: false
+            reservationsState: []
         }
 
         this.handleEditNameChange = this.handleEditNameChange.bind(this);
@@ -48,24 +43,25 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         this.handleEditPhoneChange = this.handleEditPhoneChange.bind(this);
     }
 
-    handleRemoveReservation(index: number) {
-        this.props.removeReservation(index)
+    handleRemoveReservation(ReservationIDToRemove: number) {
+        this.props.removeReservation(ReservationIDToRemove)
     }
 
-    handleEditReservation(index: any): void {
+    handleEditReservation(index: number){
         let reservations = this.state.reservationsState;
         reservations[index].isInEditMode = true;
         this.setState({ reservationsState: reservations });
     }
 
     handleEditNameChange(e: any) {
+        // Sets value of property in state to e.target.value through tabindex, index is used from the loop.
         const target = e.target;
         const value = target.value;
-        const name = target.name;
+        // Make a copy of state to modify
         let reservations = this.state.reservationsState;
         reservations[target.tabIndex].Name = value;
-        console.log(reservations[target.tabIndex]);
 
+        // Set state to modified state
         this.setState({
             reservationsState: reservations
         });
@@ -74,7 +70,6 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
     handleEditDateChange(e: any) {
         const target = e.target;
         const value = target.value;
-        const name = target.name;
         let reservations = this.state.reservationsState;
         reservations[target.tabIndex].Date = value;
 
@@ -86,7 +81,6 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
     handleEditPhoneChange(e: any) {
         const target = e.target;
         const value = target.value;
-        const name = target.name;
         let reservations = this.state.reservationsState;
         reservations[target.tabIndex].Phone = value;
 
@@ -98,7 +92,6 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
     handleEditEmailChange(e: any) {
         const target = e.target;
         const value = target.value;
-        const name = target.name;
         let reservations = this.state.reservationsState;
         reservations[target.tabIndex].Email = value;
 
@@ -110,7 +103,6 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
     handleEditTimeChange(e: any) {
         const target = e.target;
         const value = target.value;
-        const name = target.name;
         let reservations = this.state.reservationsState;
         reservations[target.tabIndex].Time = value;
 
@@ -122,7 +114,6 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
     handleEditGuestChange(e: any) {
         const target = e.target;
         const value = target.value;
-        const name = target.name;
         let reservations = this.state.reservationsState;
         reservations[target.tabIndex].Guests = value;
 
@@ -131,10 +122,12 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         });
     }
 
-    submitEditBooking(dataToBeEdited: any): void {
+    submitEditBooking(dataToBeEdited: IListBookingDetails) {
+        // Send all the data to be edited to props and to parent component which runs SQL update query 
         this.props.submitBooking(dataToBeEdited);
     }
 
+    // Update state with props 
     componentDidUpdate(prevProps: any) {
         if (this.props.reservationProps != null && prevProps.reservationProps !== this.props.reservationProps) {
             this.setState({
@@ -143,11 +136,8 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         }
     }
 
-    cancelEdit() {
-
-    }
-
     render() {
+
         let reservationListPresentation: any[] = [];
 
         for (let index = 0; index < this.state.reservationsState.length; index++) {
@@ -155,18 +145,14 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
             if (!this.state.reservationsState[index].isInEditMode) {
                 reservationListPresentation.push(
                     <li key={index}>
-
                         <p className="reservationNameAdmin">{this.state.reservationsState[index].Name}</p>
                         <div className="reservationInfoContainer">
                             <div>
-                                {/* ReservationID: {this.state.reservationsState[index].ReservationID} */}
-
                                 <p><label htmlFor="Email">EMAIL: </label><b>{this.state.reservationsState[index].Email}</b></p>
                                 <p><label htmlFor="Phone">PHONE: </label><b>{this.state.reservationsState[index].Phone}</b></p>
                             </div>
                             <div>
                                 <p>WHEN: <b>{this.state.reservationsState[index].Date}</b> at <b>{this.state.reservationsState[index].Time}</b></p>
-                                {/* <p>TIME: <b>{this.state.reservationsState[index].Time}</b></p> */}
                                 <p>NUMBER OF PEOPLE: <b>{this.state.reservationsState[index].Guests}</b></p>
                             </div>
                             <div>
@@ -184,9 +170,8 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                 reservationListPresentation.push(
                     <li key={index}>
                         <form onSubmit={this.submitEditBooking.bind(this, this.state.reservationsState[index])}>
-                            {/* ReservationID: {this.state.reservationsState[index].ReservationID} */}
                             <div>
-
+                                {/* Set value of all input fields to local state, local state is set by props from state in parent component */}
                                 <p><label htmlFor="Name">Name:</label><input type="text" name="Name" tabIndex={index} id="Name" value={this.state.reservationsState[index].Name} onChange={this.handleEditNameChange} /></p>
                                 <p><label htmlFor="Email">Email:</label><input type="text" name="Email" tabIndex={index} id="Email" value={this.state.reservationsState[index].Email} onChange={this.handleEditEmailChange} /></p>
                                 <p><label htmlFor="Phone">Phone:</label><input type="text" name="Phone" tabIndex={index} id="Phone" value={this.state.reservationsState[index].Phone} onChange={this.handleEditPhoneChange} /></p>
@@ -211,9 +196,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                                 </p>
                             </div>
                             <div>
-
                                 <button type="submit">Save</button>
-
                             </div>
                         </form>
                     </li>
@@ -225,12 +208,11 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
 
         return (
             <div className="reservationContainer">
-                <p className="numberOfReservations">NUMBER OF RESERVATIONS: <b>{this.state.reservationsState.length}</b></p> 
+                <p className="numberOfReservations">NUMBER OF RESERVATIONS: <b>{this.state.reservationsState.length}</b></p>
                 <ul>
                     {output}
                 </ul>
             </div>
-
         )
     }
 }

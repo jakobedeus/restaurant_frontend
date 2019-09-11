@@ -1,6 +1,6 @@
 import React from "react";
 import './scss/Admin.scss';
-import ListBookings from "./ListBookings/ListBookings";
+import ListBookings, { IListBookingDetails } from "./ListBookings/ListBookings";
 const axios = require('axios');
 
 interface IAdminState {
@@ -9,22 +9,19 @@ interface IAdminState {
 }
 
 export interface IAdminDetails {
-	Date: any,
-	Time: any,
-	Guests: any,
-	Name: any,
-	Phone: any,
-	Email: any,
-	ReservationID: any,
-	CustomerID: any,
+	Date: string,
+	Time: number,
+	Guests: number,
+	Name: string,
+	Phone: number,
+	Email: string,
+	ReservationID: number,
+	CustomerID: number,
 	isInEditMode: boolean;
 }
 
 class Admin extends React.Component<{}, IAdminState>  {
 
-	getBookingsUrl = 'http://localhost:8888/api/getBookings.php';
-	bookingDeleteUrl = 'http://localhost:8888/api/deleteBooking.php';
-	bookingEditUrl = 'http://localhost:8888/api/updateBooking.php';
 	constructor(props: any) {
 		super(props)
 		this.state = {
@@ -33,67 +30,50 @@ class Admin extends React.Component<{}, IAdminState>  {
 		}
 
 		this.removeReservation = this.removeReservation.bind(this);
-		this.editReservation = this.editReservation.bind(this);
 		this.handleEditBooking = this.handleEditBooking.bind(this);
 	}
 
+	getBookingsUrl = 'http://localhost:8888/api/getBookings.php';
+	deleteBookingUrl = 'http://localhost:8888/api/deleteBooking.php';
+	updateBookingUrl = 'http://localhost:8888/api/updateBooking.php';
+
 	componentDidMount() {
+		// Fetch all reservations and set it to state
 		axios.get(this.getBookingsUrl, {
-
 		}).then((response: any) => {
-			console.log(response.data)
-
 			this.setState({
 				reservations: response.data
 			})
-
 		})
-		// .catch((error: any) => {
-		// 	// console.log(error)
-		// })
 	}
 
-	removeReservation = (ReservationID: number) =>  {
+	removeReservation = (ReservationID: number) => {
+		// Use variable sent from form to delete entire reservation.
 		axios.delete(
-			this.bookingDeleteUrl,
+			this.deleteBookingUrl,
 			{
 				data:
 					JSON.stringify({ ReservationID: ReservationID })
 			}).then((response: any) => {
-				this.setState({reservations: this.state.reservations.filter(item => item.ReservationID != ReservationID)});
+				// .filter is another way of removing wanted item from array.
+				this.setState({ reservations: this.state.reservations.filter(item => item.ReservationID != ReservationID) });
 			});
 	}
 
-	editReservation(item: any) {
-		const reservations = this.state.reservations;
-		this.setState({
-			reservations: [...reservations],
-			showEditReservation: true
-		}, () => {
-
-		});
-	}
-
-	handleEditBooking = (dataToBeEdited: any) => {
-		console.log(dataToBeEdited);
-
-		axios.put(this.bookingEditUrl, dataToBeEdited, {
+	handleEditBooking = (dataToBeEdited: IListBookingDetails) => {
+		// Recieve data from form which user wants to edit, and make request.
+		axios.put(this.updateBookingUrl, dataToBeEdited, {
 			headers: { 'Content-Type': 'text/plain;' },
 		}).then((response: any) => {
-			console.log("Edit booking saved")
-		}).catch((error: any) => {
-			console.log(error)
 		})
 	}
 
 	render() {
-
 		return (
 			<ListBookings
 				reservationProps={this.state.reservations}
 				removeReservation={this.removeReservation}
 				editReservationProps={this.state.showEditReservation}
-				editReservationState={this.editReservation}
 				submitBooking={this.handleEditBooking}
 			/>
 		)

@@ -60,9 +60,13 @@ class Admin extends React.Component<{}, IAdminState>  {
 				data:
 					JSON.stringify({ ReservationID: ReservationID })
 			}).then((response: any) => {
-				this.state.reservations.map((item, index) => (
-					this.state.reservations.splice(index, 1)
-				))
+				this.state.reservations.splice(ReservationID, 1)
+				// this.state.reservations.map((item, index) => (
+				// 	console.log(index),
+				// 	this.state.reservations.splice(index, 1)
+					
+					
+				// ))
 				this.setState({ reservations: this.state.reservations });
 			});
 	}

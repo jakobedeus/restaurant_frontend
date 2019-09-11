@@ -147,17 +147,24 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
             if (!this.state.reservationsState[index].isInEditMode) {
                 reservationListPresentation.push(
                     <li key={index}>
-                        ReservationID: {this.state.reservationsState[index].ReservationID}
-                        Name: {this.state.reservationsState[index].Name}
-                        Email: {this.state.reservationsState[index].Email}
-                        Phone: {this.state.reservationsState[index].Phone}
-                        Date: {this.state.reservationsState[index].Date}
-                        Time: {this.state.reservationsState[index].Time}
-                        Guests: {this.state.reservationsState[index].Guests}
-                        <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)}>Remove</button>
-                        <button
-                            onClick={this.handleEditReservation.bind(this, index)
-                            }>Edit</button>
+                        <div>
+                            {/* ReservationID: {this.state.reservationsState[index].ReservationID} */}
+                            <p>{this.state.reservationsState[index].Name}</p>
+                            <p>{this.state.reservationsState[index].Email}</p>
+                            <p>{this.state.reservationsState[index].Phone}</p>
+                        </div>
+                        <div>
+                            <p>Date: <b>{this.state.reservationsState[index].Date}</b></p>
+                            <p>Time: <b>{this.state.reservationsState[index].Time}</b></p>
+                            <p>Guests: <b>{this.state.reservationsState[index].Guests}</b></p>
+                        </div>
+                        <div>
+                            <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)}>Remove</button>
+                            <button
+                                onClick={this.handleEditReservation.bind(this, index)
+                                }>Edit</button>
+                        </div>
+
                     </li>
                 )
             }
@@ -165,26 +172,37 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                 reservationListPresentation.push(
                     <li key={index}>
                         <form onSubmit={this.submitEditBooking.bind(this, this.state.reservationsState[index])}>
-                            ReservationID: {this.state.reservationsState[index].ReservationID}
-                            <input type="text" name="Name" tabIndex={index} id="" value={this.state.reservationsState[index].Name} onChange={this.handleEditNameChange} />
-                            <input type="text" name="Email" tabIndex={index} id="" value={this.state.reservationsState[index].Email} onChange={this.handleEditEmailChange} />
-                            <input type="text" name="Phone" tabIndex={index} id="" value={this.state.reservationsState[index].Phone} onChange={this.handleEditPhoneChange} />
-                            <input type="date" name="Date" tabIndex={index} id="" value={this.state.reservationsState[index].Date} onChange={this.handleEditDateChange} />
+                            {/* ReservationID: {this.state.reservationsState[index].ReservationID} */}
+                            <div>
 
-                            <select name="Time" value={this.state.reservationsState[index].Time} tabIndex={index} onChange={this.handleEditTimeChange}>
-                                <option value="18">18</option>
-                                <option value="21">21</option>
-                            </select>
+                                <p><label htmlFor="Name">Name:</label><input type="text" name="Name" tabIndex={index} id="Name" value={this.state.reservationsState[index].Name} onChange={this.handleEditNameChange} /></p>
+                                <p><label htmlFor="Email">Email:</label><input type="text" name="Email" tabIndex={index} id="Email" value={this.state.reservationsState[index].Email} onChange={this.handleEditEmailChange} /></p>
+                                <p><label htmlFor="Phone">Phone:</label><input type="text" name="Phone" tabIndex={index} id="Phone" value={this.state.reservationsState[index].Phone} onChange={this.handleEditPhoneChange} /></p>
+                            </div>
+                            <div>
+                                <p><label htmlFor="Date">Date:</label><input type="date" name="Date" tabIndex={index} id="Date" value={this.state.reservationsState[index].Date} onChange={this.handleEditDateChange} /></p>
+                                <p><label htmlFor="Time">Time:</label><select name="Time" id="Time" value={this.state.reservationsState[index].Time} tabIndex={index} onChange={this.handleEditTimeChange}>
+                                    <option value="18">18</option>
+                                    <option value="21">21</option>
+                                </select>
+                                </p>
 
-                            <select name="Guests" tabIndex={index} value={this.state.reservationsState[index].Guests} onChange={this.handleEditGuestChange}>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>
-                            <button type="submit">Save</button>
+
+                                <p><label htmlFor="Guests">Guests:</label><select name="Guests" id="Guests" tabIndex={index} value={this.state.reservationsState[index].Guests} onChange={this.handleEditGuestChange}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                                </p>
+                            </div>
+                            <div>
+                                <button>Cancel editing</button>
+                                <button type="submit">Save</button>
+
+                            </div>
                         </form>
                     </li>
                 )

@@ -1,0 +1,16 @@
+.reservation-check-block {
+    display: flex;
+    border: 2px solid blue;
+    justify-content: center;
+    margin: 3rem;
+    color: #fff;
+
+    .inputs-group {
+        display: flex;
+        flex-direction: row;
+
+        .button-check {
+          
+        }    
+    }
+}

@@ -159,8 +159,8 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
 
     render() {
         return (
-            <div className="card textcenter mt-3">
-                <div className="card-body">
+            <div className="container">
+                <div className="reservation-create-block">
                     <form id="aptForm" onSubmit={this.handleSubmit}>
 
                         <input type="hidden" name="" id="" value={this.props.bookingDate} />

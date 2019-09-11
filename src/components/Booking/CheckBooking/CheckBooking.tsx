@@ -52,14 +52,16 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
 
     render() {
         return (
-            <div className="card textcenter mt-3">
-                <div className="card-body">
-                    <form id="aptForm" onSubmit={this.handleSubmit}>
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right">
+
+            <div className="container">
+                <div className="reservation-check-block">
+                    <form id="reservation-form" onSubmit={this.handleSubmit}>
+                        <div className="inputs-group">
+                        <div className="form-group-date form-row">
+                            <label className="date">
                                 Date
                         </label>
-                            <div className="col-md-10">
+                            <div className="date-input">
                                 <input
                                     type="date"
                                     className="form-control"
@@ -99,14 +101,14 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                                 </select>
                             </div>
                         </div>
-
-                        <div className="form-group form-row mb-0">
-                            <div className="offset-md-2 col-md-10">
-                                <button type="submit" className="btn btn-primary d-block ml-auto">
-                                    Check Availability
-                            </button>
-                            </div>
                         </div>
+
+                        <div className="button-check">
+                            <button type="submit" className="btn btn-primary">
+                                Check Availability
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>

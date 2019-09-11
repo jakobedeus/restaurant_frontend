@@ -136,8 +136,15 @@ class Booking extends React.Component<{}, IBookingState>  {
     render() {
         console.log(this.state)
         return (
-            <div className="container">
+            <div className="booking-container">
+                
+                <h1 className="banner">
+                    <span>NO NAME RESTAURANT</span>
+                    - TWO LOCATIONS OPEN DAILY/ SERVICE TILL 11 PM ON FRI & SAT!
+                </h1>
 
+                <h2>Make your reservation</h2>
+            
                 {!this.state.bookingCreateOk && <CheckBooking
                     isCheckFormValidated={this.state.isCheckFormValidated}
                     handleCheckBooking={this.handleCheckBooking}

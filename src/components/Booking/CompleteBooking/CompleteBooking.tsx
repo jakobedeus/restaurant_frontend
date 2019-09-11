@@ -17,10 +17,10 @@ class CompleteBooking extends React.Component<ICompleteBookingProps, {}>  {
 
     render() {
         return (
-            <div>
+            <div className="reservation-complete-block">
                 <div>Thank you for your reservation</div>
 
-                <button onClick={this.newBooking}></button>
+                <button onClick={this.newBooking}>Go back</button>
             </div>
         )
     }

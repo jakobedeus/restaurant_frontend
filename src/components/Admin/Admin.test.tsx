@@ -1,8 +1,9 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
-import { shallow, configure } from 'enzyme';
+import Enzyme, { shallow, configure, mount } from 'enzyme';
 import Admin from './Admin';
 import IAdminState from "./Admin";
+
 
 configure({ adapter: new Adapter() });
 
@@ -28,6 +29,4 @@ it("fetches data and updates state", async () => {
     }, () => {
         expect(wrapper.instance().state.reservations[0].ReservationID).toBe("4");
     });
-  
-    
   });

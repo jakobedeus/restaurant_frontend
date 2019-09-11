@@ -6,11 +6,11 @@ ul {
     font-family: 'Montserrat', sans-serif;
     font-weight:normal;
     margin: 0 auto;
-    font-size: .9em;
+    font-size: .8em;
     padding: 0;
 
     @include tablet{
-        width: 80%;
+        width: 70%;
     }
 
     li {

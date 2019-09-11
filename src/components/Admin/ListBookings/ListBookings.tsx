@@ -23,7 +23,8 @@ export interface IListBookingDetails {
 
 interface IListBookingState {
     editReservationProps: boolean,
-    reservationsState: IListBookingDetails[]
+    reservationsState: IListBookingDetails[],
+    
 }
 
 class ListBookings extends React.Component<IListBookingProps, IListBookingState>  {
@@ -139,6 +140,10 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         }
     }
 
+    cancelEdit() {
+       
+    }
+
     render() {
         let reservationListPresentation: any[] = [];
 
@@ -148,7 +153,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                 reservationListPresentation.push(
                     <li key={index}>
                         <div>
-                            {/* ReservationID: {this.state.reservationsState[index].ReservationID} */}
+                            ReservationID: {this.state.reservationsState[index].ReservationID}
                             <p>{this.state.reservationsState[index].Name}</p>
                             <p>{this.state.reservationsState[index].Email}</p>
                             <p>{this.state.reservationsState[index].Phone}</p>
@@ -199,7 +204,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                                 </p>
                             </div>
                             <div>
-                                <button>Cancel editing</button>
+                                
                                 <button type="submit">Save</button>
 
                             </div>

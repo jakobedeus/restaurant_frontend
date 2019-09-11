@@ -1,0 +1,152 @@
+@import '../../../../scss/base.scss';
+
+.container {
+
+    h2 {
+        margin-top: 2rem;
+        font-size: 1.5em;
+    }
+
+    .reservation-check-block {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 4rem;
+        color: #fff;
+    
+    
+        .inputs-group {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            
+            @include tablet {
+                flex-direction: row;
+              }
+    
+            .form-row {
+                padding: 1.5rem;
+            }
+    
+            .form-group-date {
+    
+                label {
+                    font-size: 24px;
+                    line-height: 29px;
+                    letter-spacing: 0.05em;
+                }
+    
+                input {
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    outline: none;
+                    display: block;
+                    width: 100%;
+                    padding: 7px;
+                    border: none;
+                    border-bottom: 1px solid #ddd;
+                    background: transparent;
+                    margin-bottom: 10px;
+                    height: 45px;
+                    font-weight: 400;
+                    font-size: 18px;
+                    color: #fff;
+                
+                 }
+    
+            }
+    
+            .form-group-time {
+                display: flex;
+                flex-direction: column;
+    
+                .time {
+                    font-size: 24px;
+                    line-height: 29px;
+                    letter-spacing: 0.05em;
+                }
+    
+                .radio-toolbar {
+                   margin-top: 0.5rem;
+    
+                   label {
+                    color: #fff;
+                    display: inline-flex;
+                    cursor: pointer;
+                    font-weight: bold;
+                    padding: 5px; 
+                    font-weight: 400;
+                    font-size: 18px;
+                   }
+                }
+                          
+            }
+    
+            .form-group-guests {
+    
+                label {
+                    font-size: 24px;
+                    line-height: 29px;
+                    letter-spacing: 0.05em; 
+                }
+                  
+            }
+        }
+    
+        .button-check {
+            display: flex;
+            justify-content: center;
+    
+            .btn-check {
+                background-color: $primary;
+                border-radius: 3px;
+                padding: 0.3rem 0.6rem;
+                color: white;
+                text-decoration: none;
+                font-family: $font-primary;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 0.8rem;
+                line-height: 22px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                border: none;
+        
+                &:hover {
+                    background-color: $secondary;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+        
+        
+
+        
+
+
+        // .button-check {
+
+        //     .btn-check {
+        //         background-color: $primary;
+        //         border-radius: 3px;
+        //         padding: 0.3rem 0.5rem;
+        //         display: inline-block;
+        //         cursor: pointer;
+        //         color: #FFFFFF;
+        //         font-size: 16px;
+        //         font-weight: 700;
+        //         padding: 8px 18px;
+        //         text-decoration: none;
+        //         text-transform: uppercase;
+    
+        //         &:hover {
+        //             background-color: $secondary;
+        //             color: white;
+        //         }
+        //     }
+          
+        // }    
+    

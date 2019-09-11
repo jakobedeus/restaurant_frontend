@@ -35,7 +35,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
             e.preventDefault();
             this.props.handleCheckBookingChange(e);
         } else {
-            alert('You cant book in the past.');
+            alert("You can't book in the past.");
         }
     }
 
@@ -49,17 +49,21 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
         e.preventDefault();
         this.props.handleCheckBooking(e);
     }
+    
 
     render() {
         return (
-            <div className="card textcenter mt-3">
-                <div className="card-body">
-                    <form id="aptForm" onSubmit={this.handleSubmit}>
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right">
+
+            <div className="container">
+                <h2>Make a reservation</h2>
+                <div className="reservation-check-block">
+                    <form id="reservation-form" onSubmit={this.handleSubmit}>
+                        <div className="inputs-group">
+                        <div className="form-group-date form-row">
+                            <label className="date">
                                 Date
-                        </label>
-                            <div className="col-md-10">
+                             </label>
+                            <div className="date-input">
                                 <input
                                     type="date"
                                     className="form-control"
@@ -70,25 +74,26 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                             </div>
                         </div>
 
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right" htmlFor="time">
+                        <div className="form-group-time form-row">
+                            <label className="time">
                                 Time
                             </label>
-                            <div className="col-md-10">
+                            <div className="radio-toolbar">
                                 <label htmlFor="time18">18.00</label>
-                                <input type="radio" name="bookingTime" id="time18" value="18" checked onChange={this.handleTimeChange} />
-
+                                <input type="radio" name="bookingTime" id="time18" value="18" onChange={this.handleTimeChange} checked/>
+                            </div>    
+                            <div className="radio-toolbar">
                                 <label htmlFor="time21">21.00</label>
                                 <input type="radio" name="bookingTime" id="time21" value="21" onChange={this.handleTimeChange} />
-
                             </div>
+                            
                         </div>
 
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right">
+                        <div className="form-group-guests form-row">
+                            <label className="guests">
                                 Guests
                         </label>
-                            <div className="col-md-10">
+                            <div className="input-select-guests" >
                                 <select name="bookingNumberOfGuests" onChange={this.handleSelectChange} value={this.props.numberOfGuestsState}>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -99,14 +104,14 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                                 </select>
                             </div>
                         </div>
-
-                        <div className="form-group form-row mb-0">
-                            <div className="offset-md-2 col-md-10">
-                                <button type="submit" className="btn btn-primary d-block ml-auto">
-                                    Check Availability
-                            </button>
-                            </div>
                         </div>
+
+                        <div className="button-check">
+                            <button type="submit" className="btn-check">
+                                Check Availability
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>

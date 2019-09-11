@@ -1,7 +1,47 @@
-.reservation-complete-block {
-    display: flex;
-    border: 2px solid green;
-    justify-content: center;
-    margin: 3rem;
-    color: #fff;
+@import '../../../../scss/base.scss';
+
+.container {
+
+    .reservation-complete-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 3rem;
+        color: #fff;
+        height: 300px;
+    
+        p {
+            text-align: center;
+    
+        }
+
+        .button-complete {
+            display: flex;
+            justify-content: center;
+
+            .btn-back{
+                background-color: $primary;
+                border-radius: 3px;
+                padding: 0.5rem 0.8rem;
+                color: white;
+                text-decoration: none;
+                font-family: $font-primary;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 0.8rem;
+                line-height: 22px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                border: none;
+        
+                &:hover {
+                    background-color: $secondary;
+                    color: white;
+                }
+            }
+            
+        }
+
+    }
 }

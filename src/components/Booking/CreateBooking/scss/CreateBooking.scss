@@ -1,7 +1,194 @@
-.reservation-create-block {
-    display: flex;
-    border: 2px solid yellow;
-    justify-content: center;
-    margin: 3rem;
-    color: #fff;
+@import "../../../../scss/base";
+
+.container {
+    .availability-text {
+        font-family: $font-primary;
+        font-weight: 500;
+        font-size: 1em;
+        line-height: 24px;
+        letter-spacing: 0.05em;
+
+        span {
+            font-weight: 800;
+        }
+    }
+
+    .reservation-create-block {
+        display: flex;
+        justify-content: center;
+        margin: 3rem;
+        color: #fff;
+
+        .inputs-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            @include tablet {
+                flex-direction: row;
+            }
+
+            .form-row {
+                display: flex;
+                padding: .5em;
+        
+                // label {
+                //     padding: .5em 1em .5em 0;
+                //     flex: 1;
+                // }
+        
+                // input {
+                //     flex: 2;
+                //     padding: .5em;
+                
+                // }
+
+                label {
+                    font-size: 24px;
+                    line-height: 29px;
+                    letter-spacing: 0.05em;
+                    padding: .5em .2em .5em 1em;
+                    flex: 1;
+                }
+    
+                input {
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    outline: none;
+                    display: block;
+                    width: 100%;
+                    padding: .5em;
+                    border: none;
+                    border-bottom: 1px solid #ddd;
+                    background: transparent;
+                    margin-bottom: 10px;
+                    height: 45px;
+                    font-weight: 400;
+                    font-size: 18px;
+                    color: #fff;
+                    flex: 2;
+                
+                 }
+        
+            }
+
+            .form-group-name {
+                .invalid-feedback {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    bottom: 140px;
+                    left: 50px;
+                }
+            }
+        
+            .form-group-phone {
+                .invalid-feedback {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    bottom: 110px;
+                    left: 50px;
+                }
+            }
+
+            .form-group-email {
+                .invalid-feedback {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    bottom: 80px;
+                    left: 50px;
+                }
+            }
+        
+        
+            // .form-row {
+            //     display: flex;
+            //     padding: 1.5rem;
+        
+            //     label {
+            //         font-size: 24px;
+            //         line-height: 29px;
+            //         letter-spacing: 0.05em;
+            //     }
+        
+            //     input {
+            //         box-sizing: border-box;
+            //         -webkit-box-sizing: border-box;
+            //         -moz-box-sizing: border-box;
+            //         outline: none;
+            //         display: block;
+            //         width: 100%;
+            //         padding: 7px;
+            //         border: none;
+            //         border-bottom: 1px solid #ddd;
+            //         background: transparent;
+            //         margin-bottom: 10px;
+            //         height: 45px;
+            //         font-weight: 400;
+            //         font-size: 18px;
+            //         color: #fff;
+                
+            //      }
+            // }
+        
+            // .form-group-name {
+        
+            
+        
+            // }
+
+        }
+
+        .gdpr-row {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 2em;
+
+            @include tablet {
+                flex-direction: row;
+            }
+
+            .form-gdpr {
+                margin-right: 1.5em;
+                margin-top: .5em;
+
+                .gdpr-unchecked {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    bottom: 50px;
+                    left: 50px;
+                }
+            }
+
+            .btn-create-booking{
+                background-color: $primary;
+                border-radius: 3px;
+                padding: 0.5rem 0.8rem;
+                color: white;
+                text-decoration: none;
+                font-family: $font-primary;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 0.8rem;
+                line-height: 22px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                border: none;
+        
+                &:hover {
+                    background-color: $secondary;
+                    color: white;
+                }
+            }
+            
+
+        }
+
+
+    } 
 }

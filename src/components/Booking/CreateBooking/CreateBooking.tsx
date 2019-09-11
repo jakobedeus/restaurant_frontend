@@ -155,78 +155,83 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
             this.validateGDPR(e)
         }
  
-    }
+    } 
 
     render() {
         return (
             <div className="container">
+                <h2 className="availability-text">Table available for &nbsp;
+                    <span>{this.props.bookingGuests}</span> people on &nbsp;   
+                    <span>{this.props.bookingDate}</span> at &nbsp;  
+                    <span>{this.props.bookingTime}</span>
+                </h2>
                 <div className="reservation-create-block">
-                    <form id="aptForm" onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="inputs-group">
 
-                        <input type="hidden" name="" id="" value={this.props.bookingDate} />
-                        <input type="hidden" name="" id="" value={this.props.bookingGuests} />
-                        <input type="hidden" name="" id="" value={this.props.bookingTime} />
+                            <input type="hidden" name="" id="" value={this.props.bookingDate} />
+                            <input type="hidden" name="" id="" value={this.props.bookingGuests} />
+                            <input type="hidden" name="" id="" value={this.props.bookingTime} />
 
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right">
-                                Name
-                        </label>
-                            <div className="col-md-10">
+                            <div className="form-group-name form-row">
+                                <label htmlFor="bookingName">
+                                    Name
+                                </label>
                                 <input
                                     name='bookingName'
                                     className={`form-control ${this.state.errorName ? 'is-invalid' : ''}`}
-                                    id='name'
-                                    placeholder='Enter name'
+                                    id='bookingnName'
                                     value={this.state.bookingName}
                                     onChange={this.handleNameChange}
                                     onBlur={this.validateName}
                                 />
 
-                                <div className='invalid-feedback'>{this.state.errorName}</div>
+                                <div className='invalid-feedback'>
+                                    {this.state.errorName}
+                                </div>
                             </div>
-                            {/* <span>{this.state.errorBookingName}</span> */}
-                        </div>
-
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right" htmlFor="customerPhone">
-                                Phone
-                        </label>
-                            <div className="col-md-10">
+        
+                            <div className="form-group-phone form-row">
+                                <label htmlFor="bookingPhone">
+                                    Phone
+                                </label>
                                 <input
                                     type="text"
                                     className={`form-control ${this.state.errorPhone ? 'is-invalid' : ''}`}
                                     name="bookingPhone"
                                     value={this.state.bookingPhone}
-                                    placeholder="Customer's Phone"
                                     onChange={this.handlePhoneChange}
                                     onBlur={this.validatePhone}
                                 />
-                                <div className='invalid-feedback'>{this.state.errorPhone}</div>
+                                <div className='invalid-feedback'>
+                                    {this.state.errorPhone}
+                                </div>
                             </div>
-                        </div>
+                        
 
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right" htmlFor="customerEmail">
-                                Email
-                        </label>
-                            <div className="col-md-10">
+                            <div className="form-group-email form-row">
+                                <label htmlFor="bookingEmail">
+                                    Email
+                                </label>
                                 <input
                                     type="text"
                                     className={`form-control ${this.state.errorEmail ? 'is-invalid' : ''}`}
                                     name="bookingEmail"
                                     value={this.state.bookingEmail}
-                                    placeholder="Customer'email"
                                     onChange={this.handleEmailChange}
                                     onBlur={this.validateEmail}
                                 />
-                                <div className='invalid-feedback'>{this.state.errorEmail}</div>
+                                <div className='invalid-feedback'>
+                                    {this.state.errorEmail}
+                                </div>
                             </div>
                         </div>
-                        <div className="form-group form-row">
-                            <label className="col-md-2 col-form-label text-md-right" htmlFor="GDPR">
-                                GDPR
-                        </label>
-                            <div className="col-md-10">
+                      
+                        <div className="gdpr-row">
+                            <div className="form-gdpr form-row">
+                                <label htmlFor="GDPR">
+                                    GDPR
+                                </label>
                                 <input
                                     type="checkbox"
                                     className={`form-control ${this.state.errorGDPR ? 'is-invalid' : ''}`}
@@ -235,20 +240,15 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                                     onChange={this.handleGDPRChange}
                                     onBlur={this.validateGDPR}
                                 />
-                                <div className='invalid-feedback'>{this.state.errorGDPR}</div>
+                                <div className='gdpr-unchecked'>
+                                    {this.state.errorGDPR}
+                                </div>
                             </div>
-
-
-
-                        </div>
-
-                        <div className="form-group form-row mb-0">
-                            <div className="offset-md-2 col-md-10">
-                                {/* disabled={!this.state.isFormValidated} */}
-                                <button type="submit" className="btn btn-primary d-block ml-auto">
+                            {/* disabled={!this.state.isFormValidated} */}
+                            <button type="submit" className="btn-create-booking">
                                     Add reservation
                             </button>
-                            </div>
+                         
                         </div>
                     </form>
                 </div>

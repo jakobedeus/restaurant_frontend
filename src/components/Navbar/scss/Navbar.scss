@@ -21,7 +21,15 @@
         &:hover {
              color: $primary;
         }
+
+        
     }
+
+    .active {
+        color: $primary;
+    }
+
+    
 
     .link-group {
         display: flex;

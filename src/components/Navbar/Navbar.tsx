@@ -1,6 +1,6 @@
 import React from "react";
 import './scss/Navbar.scss';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 class Navbar extends React.Component<{}, {}>  {
 
@@ -9,11 +9,9 @@ class Navbar extends React.Component<{}, {}>  {
 
 					<nav className="navbar">
             <div className="link-group">
-              <Link to="/" className="navbar-brand">
-                LOGO
-              </Link>
-							<Link className="nav-item nav-link" to="/about">About</Link>
-							<Link className="nav-item nav-link" to="/admin">Admin</Link>
+              <Link className="navbar-brand" to="/" >LOGO</Link>
+							<NavLink className="nav-item nav-link" activeClassName="active" to="/about">About</NavLink>
+							<NavLink className="nav-item nav-link" activeClassName="active" to="/admin">Admin</NavLink>
 							<Link className="nav-item nav-link btn-booking" to="/booking">Reserve a table</Link>
             </div>
 					</nav>

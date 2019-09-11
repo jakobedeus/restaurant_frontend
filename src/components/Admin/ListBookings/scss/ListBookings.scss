@@ -1,0 +1,44 @@
+@import "../../../../scss/mixins";
+@import "../../../../scss/variables";
+
+ul {
+    width: 90%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:normal;
+    margin: 0 auto;
+    font-size: .9em;
+    padding: 0;
+
+    @include tablet{
+        width: 80%;
+    }
+
+    li {
+        border-bottom: 1px solid gray;
+        padding: 1em 0;
+        display: flex;
+        flex-direction: column;
+
+        @include tablet{
+            flex-direction: row;
+        }
+
+        form {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            
+        }
+
+
+        div {
+            justify-content: space-between;
+            min-width: 33%;
+
+            &:nth-child(3) {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}

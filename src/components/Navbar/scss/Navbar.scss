@@ -1,3 +1,5 @@
+@import '../../../scss/base.scss';
+
 .navbar {
     background-color: #201F1F;;
     color: white;
@@ -17,7 +19,7 @@
         margin: 0.5rem 2rem;
 
         &:hover {
-             color: #F6AE49;
+             color: $primary;
         }
     }
 
@@ -30,12 +32,12 @@
     }
 
     .btn-booking {
-        background-color: #F6AE49;
+        background-color: $primary;
         border-radius: 3px;
         padding: 0.3rem 0.5rem;
 
         &:hover {
-            background-color: #D9333E;
+            background-color: $secondary;
             color: white;
         }
     }

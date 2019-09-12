@@ -59,6 +59,9 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
     }
 
     handleNameChange = (e: any) => {
+        // Set name to state on change. when state is being updated, check validation for inputfield.
+        //  To make give user direct feedback.
+        // Same goes for the other input fields.
         const target = e.target;
         const value = target.value;
         const name = target.name;
@@ -72,6 +75,8 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
     };
 
     validateName = () => {
+        // Check if name is appropriet otherwise present relevant error msg.
+        // Same goes for the other input fields.
         const { bookingName } = this.state;
         this.setState({
             errorName:
@@ -92,6 +97,7 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
     };
 
     validateEmail = () => {
+        // Test userinput through email pattern function.
         const { bookingEmail } = this.state;
         this.setState({
             errorEmail:

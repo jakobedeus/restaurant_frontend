@@ -18,6 +18,9 @@ const moment = require('moment');
 
 class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingState>  {
 
+    // Using lifting state up for some information but still using local state within component for some data.
+
+
     constructor(props: any) {
         super(props);
 
@@ -41,7 +44,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
         var GivenDate = e.target.value;
 
         this.setState({ CurrentDate: GivenDate})
-
+        // Check if date from user input is in the past
         if (GivenDate > CurrentDate) {
             e.preventDefault();
             this.props.handleCheckBookingChange(e);

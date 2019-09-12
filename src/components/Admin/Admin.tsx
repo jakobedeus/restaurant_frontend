@@ -10,7 +10,7 @@ interface IAdminState {
 
 export interface IAdminDetails {
 	Date: string,
-	Time: number,
+	Time: string,
 	Guests: number,
 	Name: string,
 	Phone: number,
@@ -62,7 +62,7 @@ class Admin extends React.Component<{}, IAdminState>  {
 
 	handleEditBooking = (dataToBeEdited: IListBookingDetails) => {
 		// Recieve data from form which user wants to edit, and make request.
-		axios.put(this.updateBookingUrl, dataToBeEdited, {
+		axios.put(this.updateBookingUrl, JSON.stringify(dataToBeEdited), {
 			headers: { 'Content-Type': 'text/plain;' },
 		}).then((response: any) => {
 		})

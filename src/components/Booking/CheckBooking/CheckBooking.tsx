@@ -5,7 +5,7 @@ interface ICheckBookingProps {
     handleCheckBooking(e: any): void;
     handleCheckBookingChange(e: any): void;
     selectOnChange(e: any): void;
-    numberOfGuestsState: string;
+    numberOfGuestsState: number;
     isCheckFormValidated: boolean;
     
 }

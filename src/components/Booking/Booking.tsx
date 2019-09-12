@@ -5,17 +5,16 @@ import CreateBooking, { ICreateBookingState } from "./CreateBooking/CreateBookin
 import CompleteBooking from "./CompleteBooking/CompleteBooking";
 
 interface IBookingState {
-    bookingDate: any,
-    bookingTime: any,
-    bookingNumberOfGuests: any,
-    bookingName: any,
-    bookingPhone: any,
-    bookingEmail: any,
+    bookingDate: string,
+    bookingTime: string,
+    bookingNumberOfGuests: number,
+    bookingName: string,
+    bookingPhone: number,
+    bookingEmail: string,
     bookingCheckOk: boolean,
     bookingCreateOk: boolean,
     isCheckFormValidated: boolean,
 }
-
 
 var moment = require('moment');
 const axios = require('axios');
@@ -28,9 +27,9 @@ class Booking extends React.Component<{}, IBookingState>  {
         this.state = {
             bookingDate: moment().format('YYYY-MM-DD'),
             bookingTime: '18:00',
-            bookingNumberOfGuests: '1',
+            bookingNumberOfGuests: 1,
             bookingName: '',
-            bookingPhone: '',
+            bookingPhone: 0,
             bookingEmail: '',
             bookingCheckOk: false,
             bookingCreateOk: false,
@@ -58,22 +57,15 @@ class Booking extends React.Component<{}, IBookingState>  {
                 bookingTime: JSON.stringify(this.state.bookingTime),
             }
         }).then((response: any) => {
-            console.log(response)
             if (response.data.length > 14) {
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({
                     bookingCheckOk: !this.state.bookingCheckOk
                 })
-                console.log(response)
-
             }
-        }).catch((error: any) => {
-            console.log(error)
         })
     }
-
-    
 
     handleCreateBooking(userInfo: ICreateBookingState) {
 
@@ -92,14 +84,7 @@ class Booking extends React.Component<{}, IBookingState>  {
                 console.log(response.data)
                 console.log("Booking created")
                 this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
-            }).catch((error: any) => {
-                console.log(error)
             })
-
-        // });
-
-        
-
     }
 
     handleCheckBookingChange(e: any) {
@@ -134,7 +119,6 @@ class Booking extends React.Component<{}, IBookingState>  {
         });
     }
     render() {
-        console.log(this.state)
         return (
             <div className="booking-container">
                 

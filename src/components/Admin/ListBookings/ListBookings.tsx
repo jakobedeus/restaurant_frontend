@@ -12,7 +12,7 @@ interface IListBookingProps {
 
 export interface IListBookingDetails {
     Date: string,
-    Time: number,
+    Time: string,
     Guests: number,
     Name: string,
     Phone: number,
@@ -179,8 +179,8 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                             <div>
                                 <p><label htmlFor="Date">Date:</label><input type="date" name="Date" tabIndex={index} id="Date" value={this.state.reservationsState[index].Date} onChange={this.handleEditDateChange} /></p>
                                 <p><label htmlFor="Time">Time:</label><select name="Time" id="Time" value={this.state.reservationsState[index].Time} tabIndex={index} onChange={this.handleEditTimeChange}>
-                                    <option value="18">18</option>
-                                    <option value="21">21</option>
+                                    <option value="18">18:00</option>
+                                    <option value="21">21:00</option>
                                 </select>
                                 </p>
 

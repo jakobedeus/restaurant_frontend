@@ -55,11 +55,11 @@ class Booking extends React.Component<{}, IBookingState>  {
             params: {
                 bookingDate: JSON.stringify(this.state.bookingDate),
                 bookingNumberOfGuests: this.state.bookingNumberOfGuests,
-                bookingTime: this.state.bookingTime,
+                bookingTime: JSON.stringify(this.state.bookingTime),
             }
         }).then((response: any) => {
             console.log(response)
-            if (response.data.length > 15) {
+            if (response.data.length > 1) {
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({

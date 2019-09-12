@@ -7,14 +7,14 @@ import IAdminState from "./Admin";
 configure({ adapter: new Adapter() });
 
 let mockData = [{
-    CustomerID: "32",
-    Guests: "4",
+    CustomerID: 32,
+    Guests: 4,
     Date: "2019-08-13",
-    Time: "21:00:00",
+    Time: 21,
     Name: "test",
     Email: "jafha@gmail.com",
-    Phone: "0723423340",
-    ReservationID: "4",
+    Phone: 12879382937,
+    ReservationID: 4,
     isInEditMode: false
 }]
 
@@ -26,7 +26,7 @@ it("fetches data and updates state", async () => {
     wrapper.instance().setState({
       reservations: mockData
     }, () => {
-        expect(wrapper.instance().state.reservations[0].ReservationID).toBe("4");
+        expect(wrapper.instance().state.reservations[0].ReservationID).toBe(4);
     });
   
     

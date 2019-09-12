@@ -9,12 +9,20 @@ interface ICheckBookingProps {
     isCheckFormValidated: boolean;
 }
 
+interface ICheckBookingState {
+    CurrentDate: any,
+}
+
 const moment = require('moment');
 
-class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
+class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingState>  {
 
     constructor(props: any) {
         super(props);
+
+        this.state = {
+            CurrentDate: moment().format('YYYY-MM-DD'),
+        }
 
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleTimeChange = this.handleTimeChange.bind(this);
@@ -30,6 +38,8 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
     handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
         var CurrentDate = moment().format('YYYY-MM-DD');
         var GivenDate = e.target.value;
+
+        this.setState({ CurrentDate: GivenDate})
 
         if (GivenDate > CurrentDate) {
             e.preventDefault();
@@ -64,11 +74,12 @@ class CheckBooking extends React.Component<ICheckBookingProps, {}>  {
                                 Date
                              </label>
                             <div className="date-input">
-                                <input
+                                <input 
                                     type="date"
                                     className="form-control"
                                     name="bookingDate"
                                     placeholder="Date"
+                                    value={this.state.CurrentDate}
                                     onChange={this.handleDateChange}
                                 />
                             </div>

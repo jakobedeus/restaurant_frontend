@@ -1,28 +1,45 @@
 @import "../../../../scss/base";
 
-.container {
+.create-container {
+
     .availability-text {
         font-family: $font-primary;
         font-weight: 500;
         font-size: 1em;
         line-height: 24px;
         letter-spacing: 0.05em;
+        color: #fff;
+        text-align: center;
+        padding: 0 50px;
+        
 
         span {
             font-weight: 800;
+        }
+
+        @include tablet {
+            flex-direction: row;
+        }
+
+        @include desktop {
+            font-family: $font-primary;
+            font-weight: 500;
+            font-size: 1em;
+            line-height: 24px;
+            letter-spacing: 0.05em;
         }
     }
 
     .reservation-create-block {
         display: flex;
         justify-content: center;
-        margin: 3rem;
+        margin-top: 2rem;
         color: #fff;
 
         .inputs-group {
             display: flex;
+            padding: .5rem;
             flex-direction: column;
-            justify-content: flex-end;
 
             @include tablet {
                 flex-direction: row;
@@ -30,25 +47,19 @@
 
             .form-row {
                 display: flex;
+                text-align: center;
                 padding: .5em;
         
-                // label {
-                //     padding: .5em 1em .5em 0;
-                //     flex: 1;
-                // }
-        
-                // input {
-                //     flex: 2;
-                //     padding: .5em;
-                
-                // }
-
                 label {
                     font-size: 24px;
                     line-height: 29px;
                     letter-spacing: 0.05em;
-                    padding: .5em .2em .5em 1em;
+                    padding: .5em .2em;
                     flex: 1;
+
+                    @include tablet {
+                        padding: .5em .2em .5em 1em;
+                    }
                 }
     
                 input {
@@ -78,8 +89,13 @@
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
-                    bottom: 140px;
-                    left: 50px;
+                    bottom: 400px;
+                    left: 120px;
+
+                    @include tablet {
+                        bottom: 140px;
+                        left: 50px;
+                    }
                 }
             }
         
@@ -88,8 +104,14 @@
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
-                    bottom: 110px;
-                    left: 50px;
+                    bottom: 370px;
+                    left: 120px;
+
+                    @include tablet {
+                        bottom: 110px;
+                        left: 50px;
+
+                    }
                 }
             }
 
@@ -98,48 +120,15 @@
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
-                    bottom: 80px;
-                    left: 50px;
+                    bottom: 340px;
+                    left: 120px;
+
+                    @include tablet {
+                        bottom: 80px;
+                        left: 50px;
+                    }
                 }
             }
-        
-        
-            // .form-row {
-            //     display: flex;
-            //     padding: 1.5rem;
-        
-            //     label {
-            //         font-size: 24px;
-            //         line-height: 29px;
-            //         letter-spacing: 0.05em;
-            //     }
-        
-            //     input {
-            //         box-sizing: border-box;
-            //         -webkit-box-sizing: border-box;
-            //         -moz-box-sizing: border-box;
-            //         outline: none;
-            //         display: block;
-            //         width: 100%;
-            //         padding: 7px;
-            //         border: none;
-            //         border-bottom: 1px solid #ddd;
-            //         background: transparent;
-            //         margin-bottom: 10px;
-            //         height: 45px;
-            //         font-weight: 400;
-            //         font-size: 18px;
-            //         color: #fff;
-                
-            //      }
-            // }
-        
-            // .form-group-name {
-        
-            
-        
-            // }
-
         }
 
         .gdpr-row {
@@ -154,31 +143,38 @@
 
             .form-gdpr {
                 margin-right: 1.5em;
-                margin-top: .5em;
+                margin: .5em 0 1em 0;
+                text-align: center;
 
                 .gdpr-unchecked {
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
+                    bottom: 310px;
+                    left: 120px;
+
+                    @include tablet {
                     bottom: 50px;
                     left: 50px;
+                    }
                 }
             }
 
             .btn-create-booking{
                 background-color: $primary;
                 border-radius: 3px;
-                padding: 0.5rem 0.8rem;
+                padding: 0.3rem 0.6rem;
                 color: white;
                 text-decoration: none;
                 font-family: $font-primary;
                 font-style: normal;
                 font-weight: bold;
-                font-size: 0.8rem;
+                font-size: 0.7rem;
                 line-height: 22px;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
                 border: none;
+
         
                 &:hover {
                     background-color: $secondary;

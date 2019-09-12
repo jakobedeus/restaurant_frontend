@@ -1,7 +1,7 @@
 @import "../../../../scss/mixins";
 @import "../../../../scss/variables";
 
-.reservationContainer {
+.reservation-container {
     width: 90%;
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
@@ -12,7 +12,7 @@
         width: 60%;
     }
 
-      .numberOfReservations {
+      .number-of-reservations {
           text-align: center;
           font-size: 1.2em;
           border-bottom: 1px solid gray;
@@ -31,7 +31,7 @@ ul {
     border-bottom: 1px solid gray;
     padding: 2em 0;
 
-    .reservationInfoContainer {
+    .reservation-info-container {
       display: flex;
       flex-direction: column;
 
@@ -46,25 +46,25 @@ ul {
       width: 100%;
     }
 
-    .removeBtn,
-    .editBtn{
+    .remove-btn,
+    .edit-btn{
       border: none;
       font-size: 1.2em;
       cursor: pointer;
     }
 
-    .saveBtn {
+    .save-btn {
       font-size: 1.2em;
       cursor: pointer;
       border: none;
     }
 
 
-    .removeBtn {
+    .remove-btn {
       color: $secondary;
     }
 
-    .reservationNameAdmin {
+    .reservation-name-admin {
       font-size: 1.4em;
       margin: .4em 0;
     }

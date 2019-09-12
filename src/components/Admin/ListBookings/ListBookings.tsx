@@ -145,8 +145,8 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
             if (!this.state.reservationsState[index].isInEditMode) {
                 reservationListPresentation.push(
                     <li key={index}>
-                        <p className="reservationNameAdmin">{this.state.reservationsState[index].Name}</p>
-                        <div className="reservationInfoContainer">
+                        <p className="reservation-name-admin">{this.state.reservationsState[index].Name}</p>
+                        <div className="reservation-info-container">
                             <div>
                                 <p><label htmlFor="Email">EMAIL: </label><b>{this.state.reservationsState[index].Email}</b></p>
                                 <p><label htmlFor="Phone">PHONE: </label><b>{this.state.reservationsState[index].Phone}</b></p>
@@ -156,10 +156,10 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                                 <p>NUMBER OF PEOPLE: <b>{this.state.reservationsState[index].Guests}</b></p>
                             </div>
                             <div>
-                                <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)} className="removeBtn" ><FaTrashAlt /></button>
+                                <button onClick={this.handleRemoveReservation.bind(this, this.state.reservationsState[index].ReservationID)} className="remove-btn" ><FaTrashAlt /></button>
                                 <button
                                     onClick={this.handleEditReservation.bind(this, index)
-                                    } className="editBtn"><FaPen /></button>
+                                    } className="edit-btn"><FaPen /></button>
                             </div>
                         </div>
 
@@ -196,7 +196,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                                 </p>
                             </div>
                             <div>
-                                <button type="submit" className="saveBtn"><FaSave /></button>
+                                <button type="submit" className="save-btn"><FaSave /></button>
                             </div>
                         </form>
                     </li>
@@ -207,8 +207,8 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
         let output = reservationListPresentation;
 
         return (
-            <div className="reservationContainer">
-                <p className="numberOfReservations">NUMBER OF RESERVATIONS: <b>{this.state.reservationsState.length}</b></p>
+            <div className="reservation-container">
+                <p className="number-of-reservations">NUMBER OF RESERVATIONS: <b>{this.state.reservationsState.length}</b></p>
                 <ul>
                     {output}
                 </ul>

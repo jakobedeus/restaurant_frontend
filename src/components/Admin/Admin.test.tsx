@@ -10,7 +10,7 @@ let mockData = [{
     CustomerID: 32,
     Guests: 4,
     Date: "2019-08-13",
-    Time: 21,
+    Time: "21:00",
     Name: "test",
     Email: "jafha@gmail.com",
     Phone: 12879382937,

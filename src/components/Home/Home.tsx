@@ -8,7 +8,7 @@ class Home extends React.Component<{}, {}>  {
             <div className="hero-container">
                 <div className="title-container">
                     <div className="row">
-                        <h1>No Name Restaurant</h1>
+                        <h1>セバスチャン</h1>
                         <h2>Tuesday - Sunday &emsp;&emsp; 12 am - Midnight </h2>
                     </div>
                 </div>

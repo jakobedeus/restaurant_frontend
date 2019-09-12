@@ -150,7 +150,18 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
         e.preventDefault();
         if (this.state.bookingGDPR === true && validEmailRegex.test(this.state.bookingEmail) && this.state.bookingName.length > 3 && this.state.bookingPhone.length > 7) {
             this.props.handleCreateBooking(this.state);
-        } else {
+
+        } else if (this.state.bookingName.length == 0) {
+            this.setState({ errorName: "Name must be longer than 3 characters"})
+
+        }  else if ( this.state.bookingPhone.length == 0) {
+            this.setState({ errorPhone: "Not a valid number, min 7 digits"})
+            
+        } else if ( validEmailRegex.test(this.state.bookingEmail) == false) {
+            this.setState({ errorEmail: "Email is wrong"})
+
+        }  
+        else {
             this.validateGDPR(e)
         }
  

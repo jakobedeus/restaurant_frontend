@@ -17,7 +17,7 @@ interface IBookingState {
 }
 
 
-
+var moment = require('moment');
 const axios = require('axios');
 
 class Booking extends React.Component<{}, IBookingState>  {
@@ -26,7 +26,7 @@ class Booking extends React.Component<{}, IBookingState>  {
         super(props)
 
         this.state = {
-            bookingDate: '',
+            bookingDate: moment().format('YYYY-MM-DD'),
             bookingTime: '18',
             bookingNumberOfGuests: '1',
             bookingName: '',

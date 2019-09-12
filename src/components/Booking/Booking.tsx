@@ -59,7 +59,7 @@ class Booking extends React.Component<{}, IBookingState>  {
             }
         }).then((response: any) => {
             console.log(response)
-            if (response.data.length > 1) {
+            if (response.data.length > 15) {
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({

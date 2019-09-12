@@ -5,7 +5,7 @@ interface ICheckBookingProps {
     handleCheckBooking(e: any): void;
     handleCheckBookingChange(e: any): void;
     selectOnChange(e: any): void;
-    numberOfGuestsState: string;
+    numberOfGuestsState: number;
     isCheckFormValidated: boolean;
     
 }
@@ -17,6 +17,9 @@ interface ICheckBookingState {
 const moment = require('moment');
 
 class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingState>  {
+
+    // Using lifting state up for some information but still using local state within component for some data.
+
 
     constructor(props: any) {
         super(props);
@@ -41,7 +44,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
         var GivenDate = e.target.value;
 
         this.setState({ CurrentDate: GivenDate})
-
+        // Check if date from user input is in the past
         if (GivenDate > CurrentDate) {
             e.preventDefault();
             this.props.handleCheckBookingChange(e);

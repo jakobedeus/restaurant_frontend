@@ -5,17 +5,16 @@ import CreateBooking, { ICreateBookingState } from "./CreateBooking/CreateBookin
 import CompleteBooking from "./CompleteBooking/CompleteBooking";
 
 interface IBookingState {
-    bookingDate: any,
-    bookingTime: any,
-    bookingNumberOfGuests: any,
-    bookingName: any,
-    bookingPhone: any,
-    bookingEmail: any,
+    bookingDate: string,
+    bookingTime: string,
+    bookingNumberOfGuests: number,
+    bookingName: string,
+    bookingPhone: number,
+    bookingEmail: string,
     bookingCheckOk: boolean,
     bookingCreateOk: boolean,
     isCheckFormValidated: boolean,
 }
-
 
 var moment = require('moment');
 const axios = require('axios');
@@ -28,9 +27,9 @@ class Booking extends React.Component<{}, IBookingState>  {
         this.state = {
             bookingDate: moment().format('YYYY-MM-DD'),
             bookingTime: '18:00',
-            bookingNumberOfGuests: '1',
+            bookingNumberOfGuests: 1,
             bookingName: '',
-            bookingPhone: '',
+            bookingPhone: 0,
             bookingEmail: '',
             bookingCheckOk: false,
             bookingCreateOk: false,
@@ -58,24 +57,21 @@ class Booking extends React.Component<{}, IBookingState>  {
                 bookingTime: JSON.stringify(this.state.bookingTime),
             }
         }).then((response: any) => {
-            console.log(response)
             if (response.data.length > 14) {
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({
                     bookingCheckOk: !this.state.bookingCheckOk
                 })
-                console.log(response)
-
             }
-        }).catch((error: any) => {
-            console.log(error)
         })
     }
 
-    
-
     handleCreateBooking(userInfo: ICreateBookingState) {
+         // Since we are using lifting state up we can acess some of the variables we need through state and some 
+        // are passed to this functions as parameters of a certain interface type.
+        // Put these two sources of information together into 1 object to send to database.
+
 
             let postData = {
                 bookingName: userInfo.bookingName,
@@ -89,20 +85,12 @@ class Booking extends React.Component<{}, IBookingState>  {
             axios.post(this.postBookingUrl, postData, {
                 headers: { 'Content-Type': 'text/plain;' }
             }).then((response: any) => {
-                console.log(response.data)
-                console.log("Booking created")
                 this.setState({ bookingCreateOk: !this.state.bookingCreateOk })
-            }).catch((error: any) => {
-                console.log(error)
             })
-
-        // });
-
-        
-
     }
 
     handleCheckBookingChange(e: any) {
+        // Set changes to from props to local state.
         const target = e.target;
         const value = target.value;
         const name = target.name;
@@ -124,6 +112,7 @@ class Booking extends React.Component<{}, IBookingState>  {
 
 
     handleNewBooking() {
+         // Reset state booleans, which resets the booking process.
         this.setState({ bookingCheckOk: false, bookingCreateOk: false })
 
     }
@@ -134,7 +123,6 @@ class Booking extends React.Component<{}, IBookingState>  {
         });
     }
     render() {
-        console.log(this.state)
         return (
             <div className="booking-container">
                 
@@ -143,6 +131,7 @@ class Booking extends React.Component<{}, IBookingState>  {
                     &nbsp; - SERVICE TILL 11 PM ON FRI & SAT!
                 </h1>
             
+                {/* Check boolean value to present correct component */}
                 {!this.state.bookingCreateOk && <CheckBooking
                     isCheckFormValidated={this.state.isCheckFormValidated}
                     handleCheckBooking={this.handleCheckBooking}
@@ -151,6 +140,7 @@ class Booking extends React.Component<{}, IBookingState>  {
                     numberOfGuestsState={this.state.bookingNumberOfGuests} />
                 }
 
+                {/* Check boolean value to present correct component */}
                 {this.state.bookingCheckOk && !this.state.bookingCreateOk && <CreateBooking
                     bookingDate={this.state.bookingDate}
                     bookingGuests={this.state.bookingNumberOfGuests}
@@ -158,6 +148,7 @@ class Booking extends React.Component<{}, IBookingState>  {
                     handleCreateBooking={this.handleCreateBooking}
                     handleCreateBookingChange={this.handleCreateBookingChange} />}
 
+                {/* Check boolean value to present correct component */}
                 {this.state.bookingCreateOk &&
                     <CompleteBooking
                         handleNewBooking={this.handleNewBooking}

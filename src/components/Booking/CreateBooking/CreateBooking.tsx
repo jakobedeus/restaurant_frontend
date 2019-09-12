@@ -21,12 +21,6 @@ export interface ICreateBookingState {
     isCheckFormValidated: boolean,
 }
 
-export interface ICreateBookingErrors {
-    bookingName: any,
-    bookingPhone: any,
-    bookingEmail: any,
-}
-
 
 const validEmailRegex =
     RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -58,19 +52,13 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
         this.handleGDPRChange = this.handleGDPRChange.bind(this);
     }
 
-    // handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     e.preventDefault();
-
-    //     this.props.handleCreateBookingChange(e);
-    // }
-
-    
-
     handleNameChange = (e: any) => {
+        // Set name to state on change. when state is being updated, check validation for inputfield.
+        //  To make give user direct feedback.
+        // Same goes for the other input fields.
         const target = e.target;
         const value = target.value;
         const name = target.name;
-        // this.props.handleCreateBookingChange(e);
 
         this.setState({
             [name]: value
@@ -78,10 +66,11 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
             this.validateName();
             
         });
-
     };
 
     validateName = () => {
+        // Check if name is appropriet otherwise present relevant error msg.
+        // Same goes for the other input fields.
         const { bookingName } = this.state;
         this.setState({
             errorName:
@@ -102,11 +91,11 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
     };
 
     validateEmail = () => {
+        // Test userinput through email pattern function.
         const { bookingEmail } = this.state;
         this.setState({
             errorEmail:
-                // bookingEmail.length > 3 ? null : 'Name must be longer than 3 characters'
-                validEmailRegex.test(bookingEmail) ? null : 'Email is wrong'
+                validEmailRegex.test(bookingEmail) ? null : 'Email is invalid'
         });
     }
 
@@ -126,7 +115,7 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
         const { bookingPhone } = this.state;
         this.setState({
             errorPhone:
-                bookingPhone.length > 7 ? null : 'Not a valid number, min 7 digits'
+                bookingPhone.length > 7 ? null : 'Phone number must be min 7 digits'
         });
     }
 
@@ -134,11 +123,11 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
         const target = e.target;
         const value = target.type === "checkbox" ? target.checked : target.value;
         this.setState({ bookingGDPR: value }, () => {
-            this.validateGDPR(e);
+            this.validateGDPR();
         });
     };
 
-    validateGDPR = (e: any) => {
+    validateGDPR = () => {
         const { bookingGDPR } = this.state;
         this.setState({
             errorGDPR:
@@ -149,23 +138,21 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
     handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         if (this.state.bookingGDPR === true) {
-            // console.log(this.state)
             this.props.handleCreateBooking(this.state);
 
         } else if (this.state.bookingName.length == 0) {
             this.setState({ errorName: "Name must be longer than 3 characters"})
 
         }  else if ( this.state.bookingPhone.length == 0) {
-            this.setState({ errorPhone: "Not a valid number, min 7 digits"})
+            this.setState({ errorPhone: "Phone number must be min 7 digits"})
 
         } else if ( validEmailRegex.test(this.state.bookingEmail) == false) {
-            this.setState({ errorEmail: "Email is wrong"})
+            this.setState({ errorEmail: "Email is invalid"})
 
         }  
         else {
-            this.validateGDPR(e)
+            this.validateGDPR()
         }
- 
     } 
 
     render() {
@@ -179,10 +166,6 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                 <div className="reservation-create-block">
                     <form onSubmit={this.handleSubmit}>
                         <div className="inputs-group">
-
-                            <input type="hidden" name="" id="" value={this.props.bookingDate} />
-                            <input type="hidden" name="" id="" value={this.props.bookingGuests} />
-                            <input type="hidden" name="" id="" value={this.props.bookingTime} />
 
                             <div className="form-group-name form-row">
                                 <label htmlFor="bookingName">
@@ -255,7 +238,6 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                                     {this.state.errorGDPR}
                                 </div>
                             </div>
-                            {/* disabled={!this.state.isFormValidated} */}
                             <button type="submit" className="btn-create-booking">
                                     Add reservation
                             </button>

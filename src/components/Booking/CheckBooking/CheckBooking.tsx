@@ -7,6 +7,7 @@ interface ICheckBookingProps {
     selectOnChange(e: any): void;
     numberOfGuestsState: string;
     isCheckFormValidated: boolean;
+    
 }
 
 interface ICheckBookingState {
@@ -50,8 +51,6 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
     }
 
     handleTimeChange(e: React.ChangeEvent<HTMLInputElement>) {
-        
-        e.preventDefault();
         this.props.handleCheckBookingChange(e);
     }
 
@@ -62,6 +61,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
     
 
     render() {
+
         return (
 
             <div className="container">
@@ -91,7 +91,7 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                             </label>
                             <div className="radio-toolbar">
                                 <label htmlFor="time18">18.00</label>
-                                <input type="radio" name="bookingTime" id="time18" value="18" onChange={this.handleTimeChange} checked/>
+                                <input type="radio" name="bookingTime" id="time18" value="18" onChange={this.handleTimeChange} defaultChecked={true}/>
                             </div>    
                             <div className="radio-toolbar">
                                 <label htmlFor="time21">21.00</label>

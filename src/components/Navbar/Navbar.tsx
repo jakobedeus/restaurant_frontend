@@ -9,7 +9,7 @@ class Navbar extends React.Component<{}, {}>  {
 
 					<nav className="navbar">
             <div className="link-group">
-              <Link className="navbar-brand" to="/" >LOGO</Link>
+              <Link className="navbar-brand" to="/" >HOME</Link>
 							<NavLink className="nav-item nav-link" activeClassName="active" to="/about">About</NavLink>
 							<NavLink className="nav-item nav-link" activeClassName="active" to="/admin">Admin</NavLink>
 							<Link className="nav-item nav-link btn-booking" to="/booking">Reserve a table</Link>

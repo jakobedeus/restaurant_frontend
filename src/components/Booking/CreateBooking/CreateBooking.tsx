@@ -21,12 +21,6 @@ export interface ICreateBookingState {
     isCheckFormValidated: boolean,
 }
 
-export interface ICreateBookingErrors {
-    bookingName: any,
-    bookingPhone: any,
-    bookingEmail: any,
-}
-
 
 const validEmailRegex =
     RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -172,10 +166,6 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                 <div className="reservation-create-block">
                     <form onSubmit={this.handleSubmit}>
                         <div className="inputs-group">
-
-                            <input type="hidden" name="" id="" value={this.props.bookingDate} />
-                            <input type="hidden" name="" id="" value={this.props.bookingGuests} />
-                            <input type="hidden" name="" id="" value={this.props.bookingTime} />
 
                             <div className="form-group-name form-row">
                                 <label htmlFor="bookingName">

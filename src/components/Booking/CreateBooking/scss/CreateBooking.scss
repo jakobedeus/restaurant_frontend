@@ -18,7 +18,8 @@
         }
 
         @include tablet {
-            flex-direction: row;
+            // flex-direction: row;
+            font-size: 1.2em;
         }
 
         @include desktop {
@@ -41,9 +42,10 @@
             padding: .5rem;
             flex-direction: column;
 
-            @include tablet {
+            @include desktop {
                 flex-direction: row;
             }
+
 
             .form-row {
                 display: flex;
@@ -58,7 +60,7 @@
                     flex: 1;
 
                     @include tablet {
-                        padding: .5em .2em .5em 1em;
+                        padding: .5em .2em;
                     }
                 }
     
@@ -89,12 +91,12 @@
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
-                    bottom: 400px;
-                    left: 120px;
+                    top: 90px;
+                    left: 100px;
 
                     @include tablet {
-                        bottom: 140px;
-                        left: 50px;
+                        bottom: 330px;
+                        left: 30px;
                     }
                 }
             }
@@ -104,12 +106,12 @@
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
-                    bottom: 370px;
+                    top: 110px;
                     left: 120px;
 
                     @include tablet {
-                        bottom: 110px;
-                        left: 50px;
+                        bottom: 260px;
+                        left: 30px;
 
                     }
                 }
@@ -120,12 +122,12 @@
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
-                    bottom: 340px;
-                    left: 120px;
+                    top: 130px;
+                    left: 180px;
 
                     @include tablet {
-                        bottom: 80px;
-                        left: 50px;
+                        bottom: 190px;
+                        left: 30px;
                     }
                 }
             }
@@ -137,8 +139,10 @@
             justify-content: center;
             margin-top: 2em;
 
-            @include tablet {
-                flex-direction: row;
+            @include desktop {
+                align-items: center;
+                margin: 0;
+                
             }
 
             .form-gdpr {
@@ -150,12 +154,17 @@
                     background-color: $secondary;
                     color: #fff;
                     position: absolute;
-                    bottom: 310px;
+                    top: 70px;
                     left: 120px;
 
                     @include tablet {
-                    bottom: 50px;
-                    left: 50px;
+                        bottom: 120px;
+                        left: 30px;
+                    }
+
+                    @include desktop {
+                        bottom: 120px;
+                        left: 50px;
                     }
                 }
             }

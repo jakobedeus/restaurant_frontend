@@ -1,6 +1,6 @@
 import React from "react";
 import './scss/ListBookings.scss';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaSave } from 'react-icons/fa';
 import { FaPen } from 'react-icons/fa';
 
 interface IListBookingProps {
@@ -196,7 +196,7 @@ class ListBookings extends React.Component<IListBookingProps, IListBookingState>
                                 </p>
                             </div>
                             <div>
-                                <button type="submit">Save</button>
+                                <button type="submit" className="saveBtn"><FaSave /></button>
                             </div>
                         </form>
                     </li>

@@ -241,7 +241,7 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
                         <div className="gdpr-row">
                             <div className="form-gdpr form-row">
                                 <label htmlFor="GDPR">
-                                    GDPR
+                                    Accept GDPR's terms
                                 </label>
                                 <input
                                     type="checkbox"

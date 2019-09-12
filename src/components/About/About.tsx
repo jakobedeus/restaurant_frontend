@@ -14,9 +14,9 @@ class About extends React.Component<{}, {}>  {
                     </p>
                     <h2>Opening hours</h2>
                     <h3>Lunch</h3>
-                    <p>11:30AM to 2:20PM Monday-Friday</p>
+                    <p>From 12 Tuesday - Sunday</p>
                     <h3>Dinner</h3>
-                    <p>opens at 6:00PM to 11.00 everyday</p>
+                    <p>opens at 12AM to midnight everyday</p>
 
                 </div>
             </div>

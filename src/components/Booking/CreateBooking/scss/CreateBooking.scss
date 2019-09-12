@@ -92,11 +92,11 @@
                     color: #fff;
                     position: absolute;
                     top: 90px;
-                    left: 100px;
+                    left: 50px;
 
                     @include tablet {
-                        bottom: 330px;
-                        left: 30px;
+                        top: 120px;
+                        left: 50px;
                     }
                 }
             }
@@ -107,11 +107,11 @@
                     color: #fff;
                     position: absolute;
                     top: 110px;
-                    left: 120px;
+                    left: 50px;
 
                     @include tablet {
-                        bottom: 260px;
-                        left: 30px;
+                        top: 140px;
+                        left: 50px;
 
                     }
                 }
@@ -123,11 +123,11 @@
                     color: #fff;
                     position: absolute;
                     top: 130px;
-                    left: 180px;
+                    left: 50px;
 
                     @include tablet {
-                        bottom: 190px;
-                        left: 30px;
+                        top: 160px;
+                        left: 50px;
                     }
                 }
             }
@@ -155,15 +155,15 @@
                     color: #fff;
                     position: absolute;
                     top: 70px;
-                    left: 120px;
+                    left: 50px;
 
                     @include tablet {
-                        bottom: 120px;
-                        left: 30px;
+                        top: 180px;
+                        left: 50px;
                     }
 
                     @include desktop {
-                        bottom: 120px;
+                        top: 180px;
                         left: 50px;
                     }
                 }

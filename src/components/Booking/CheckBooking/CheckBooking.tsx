@@ -90,12 +90,12 @@ class CheckBooking extends React.Component<ICheckBookingProps, ICheckBookingStat
                                 Time
                             </label>
                             <div className="radio-toolbar">
-                                <label htmlFor="time18">18.00</label>
-                                <input type="radio" name="bookingTime" id="time18" value="18" onChange={this.handleTimeChange} defaultChecked={true}/>
+                                <label htmlFor="time18">18:00</label>
+                                <input type="radio" name="bookingTime" id="time18" value="18:00" onChange={this.handleTimeChange} defaultChecked={true}/>
                             </div>    
                             <div className="radio-toolbar">
-                                <label htmlFor="time21">21.00</label>
-                                <input type="radio" name="bookingTime" id="time21" value="21" onChange={this.handleTimeChange} />
+                                <label htmlFor="time21">21:00</label>
+                                <input type="radio" name="bookingTime" id="time21" value="21:00" onChange={this.handleTimeChange} />
                             </div>
                             
                         </div>

@@ -27,7 +27,7 @@ class Booking extends React.Component<{}, IBookingState>  {
 
         this.state = {
             bookingDate: moment().format('YYYY-MM-DD'),
-            bookingTime: '18',
+            bookingTime: '18:00',
             bookingNumberOfGuests: '1',
             bookingName: '',
             bookingPhone: '',
@@ -59,7 +59,7 @@ class Booking extends React.Component<{}, IBookingState>  {
             }
         }).then((response: any) => {
             console.log(response)
-            if (response.data.length > 1) {
+            if (response.data.length > 15) {
                 alert("The selected date and time are not available. Select another time or date")
             } else {
                 this.setState({

@@ -157,7 +157,7 @@ class CreateBooking extends React.Component<ICreateBookingProps, ICreateBookingS
 
     render() {
         return (
-            <div className="container">
+            <div className="create-container">
                 <h2 className="availability-text">Table available for &nbsp;
                     <span>{this.props.bookingGuests}</span> people on &nbsp;   
                     <span>{this.props.bookingDate}</span> at &nbsp;  

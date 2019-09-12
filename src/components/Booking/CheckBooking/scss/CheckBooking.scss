@@ -10,21 +10,26 @@
     .reservation-check-block {
         display: flex;
         justify-content: center;
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
         color: #fff;
     
     
         .inputs-group {
             display: flex;
             flex-direction: column;
-            padding: 1rem;
+            padding: .5rem;
             
             @include tablet {
                 flex-direction: row;
               }
     
             .form-row {
-                padding: 1.5rem;
+                padding: .5rem;
+                text-align: center;
+
+                @include tablet {
+                    padding: 2rem;
+                  }
             }
     
             .form-group-date {
@@ -106,16 +111,22 @@
                 font-family: $font-primary;
                 font-style: normal;
                 font-weight: bold;
-                font-size: 0.8rem;
+                font-size: 0.7rem;
                 line-height: 22px;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
                 border: none;
+                margin-top: 1rem;
         
                 &:hover {
                     background-color: $secondary;
                     color: white;
                 }
+
+                @include tablet {
+                    font-size: 0.8rem;
+                    margin-top: 0; 
+                  }
             }
         }
     }

@@ -7,9 +7,14 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        margin: 3rem;
+        margin: 0.5rem 6rem;
         color: #fff;
         height: 300px;
+
+        @include tablet {
+            margin: 3rem;
+            height: 300px;
+        }
     
         p {
             text-align: center;

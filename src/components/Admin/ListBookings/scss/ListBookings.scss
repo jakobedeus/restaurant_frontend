@@ -47,11 +47,18 @@ ul {
     }
 
     .removeBtn,
-    .editBtn {
+    .editBtn{
       border: none;
       font-size: 1.2em;
       cursor: pointer;
     }
+
+    .saveBtn {
+      font-size: 1.2em;
+      cursor: pointer;
+      border: none;
+    }
+
 
     .removeBtn {
       color: $secondary;

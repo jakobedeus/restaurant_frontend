@@ -1,0 +1,54 @@
+@import '../../../scss/base.scss';
+
+.navbar {
+    background-color: #201F1F;;
+    color: white;
+    height: 3.5rem;
+
+    .nav-item, 
+    .navbar-brand {
+        color: white;
+        text-decoration: none;
+        font-family: $font-primary;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 0.7rem;
+        line-height: 22px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 0.5rem 1.5rem;
+        
+
+        &:hover {
+             color: $primary;
+        }
+
+        @include tablet{
+           font-size: 0.8rem;
+           margin: 0.5rem 2rem;
+        }
+    }
+
+    .active {
+        color: $primary;
+    }
+
+    .link-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-booking {
+        background-color: $primary;
+        border-radius: 3px;
+        padding: 0.3rem 0.5rem;
+        color: #fff;
+
+        &:hover {
+            background-color: $secondary;
+            color: white;
+        }
+    }
+}

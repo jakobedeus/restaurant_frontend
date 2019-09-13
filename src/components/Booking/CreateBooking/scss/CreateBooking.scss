@@ -1,0 +1,199 @@
+@import "../../../../scss/base";
+
+.create-container {
+
+    .availability-text {
+        font-family: $font-primary;
+        font-weight: 500;
+        font-size: 1em;
+        line-height: 24px;
+        letter-spacing: 0.05em;
+        color: #fff;
+        text-align: center;
+        padding: 0 50px;
+        
+
+        span {
+            font-weight: 800;
+        }
+
+        @include tablet {
+            // flex-direction: row;
+            font-size: 1.2em;
+        }
+
+        @include desktop {
+            font-family: $font-primary;
+            font-weight: 500;
+            font-size: 1em;
+            line-height: 24px;
+            letter-spacing: 0.05em;
+        }
+    }
+
+    .reservation-create-block {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        color: #fff;
+
+        .inputs-group {
+            display: flex;
+            padding: .5rem;
+            flex-direction: column;
+
+            @include desktop {
+                flex-direction: row;
+            }
+
+
+            .form-row {
+                display: flex;
+                text-align: center;
+                padding: .5em;
+        
+                label {
+                    font-size: 24px;
+                    line-height: 29px;
+                    letter-spacing: 0.05em;
+                    padding: .5em .2em;
+                    flex: 1;
+
+                    @include tablet {
+                        padding: .5em .2em;
+                    }
+                }
+    
+                input {
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    outline: none;
+                    display: block;
+                    width: 100%;
+                    padding: .5em;
+                    border: none;
+                    border-bottom: 1px solid #ddd;
+                    background: transparent;
+                    margin-bottom: 10px;
+                    height: 45px;
+                    font-weight: 400;
+                    font-size: 18px;
+                    color: #fff;
+                    flex: 2;
+                
+                 }
+        
+            }
+
+            .form-group-name {
+                .invalid-feedback {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    top: 90px;
+                    left: 50px;
+
+                    @include tablet {
+                        top: 120px;
+                        left: 50px;
+                    }
+                }
+            }
+        
+            .form-group-phone {
+                .invalid-feedback {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    top: 110px;
+                    left: 50px;
+
+                    @include tablet {
+                        top: 140px;
+                        left: 50px;
+
+                    }
+                }
+            }
+
+            .form-group-email {
+                .invalid-feedback {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    top: 130px;
+                    left: 50px;
+
+                    @include tablet {
+                        top: 160px;
+                        left: 50px;
+                    }
+                }
+            }
+        }
+
+        .gdpr-row {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 2em;
+
+            @include desktop {
+                align-items: center;
+                margin: 0;
+                
+            }
+
+            .form-gdpr {
+                margin-right: 1.5em;
+                margin: .5em 0 1em 0;
+                text-align: center;
+
+                .gdpr-unchecked {
+                    background-color: $secondary;
+                    color: #fff;
+                    position: absolute;
+                    top: 70px;
+                    left: 50px;
+
+                    @include tablet {
+                        top: 180px;
+                        left: 50px;
+                    }
+
+                    @include desktop {
+                        top: 180px;
+                        left: 50px;
+                    }
+                }
+            }
+
+            .btn-create-booking{
+                background-color: $primary;
+                border-radius: 3px;
+                padding: 0.3rem 0.6rem;
+                color: white;
+                text-decoration: none;
+                font-family: $font-primary;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 0.7rem;
+                line-height: 22px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                border: none;
+
+        
+                &:hover {
+                    background-color: $secondary;
+                    color: white;
+                }
+            }
+            
+
+        }
+
+
+    } 
+}
